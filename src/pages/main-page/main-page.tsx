@@ -1,10 +1,10 @@
 import PlaceCard from '../../components/place-card/place-card';
 
 type MainPageProps = {
-    CardsCount: number;
+    cardsCount: number;
   }
 
-function MainPage({CardsCount}: MainPageProps): JSX.Element {
+function MainPage({cardsCount}: MainPageProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -74,7 +74,7 @@ function MainPage({CardsCount}: MainPageProps): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {
-                [...Array(CardsCount).keys()]
+                [...Array(cardsCount).keys()]
                   .map((item) => <PlaceCard key={item} className='cities__card'/>)
               }
             </div>
