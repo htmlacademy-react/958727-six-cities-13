@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import { MemoizedFooter } from '../../components/footer/memoized-footer';
 import { MemoizedPlaceCard } from '../../components/place-card/memoized-place-card';
 import { PlaceCardType } from '../../components/types/place-card';
+import { AppRoute } from '../../const';
 
 type FavoritesPageProps = {
   cards: PlaceCardType[];
@@ -25,9 +27,9 @@ function FavoritesPage(props: FavoritesPageProps): JSX.Element {
                   <li key={name} className="favorites__locations-items">
                     <div className="favorites__locations locations locations--current">
                       <div className="locations__item">
-                        <a className="locations__item-link" href="#">
+                        <Link className="locations__item-link" to={AppRoute.Root}>
                           <span>{name}</span>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                     <div className="favorites__places">

@@ -3,12 +3,13 @@ import { PlaceCardType } from '../types/place-card';
 import { useState, useCallback } from 'react';
 import cn from 'classnames';
 import { capitalize } from '../../helpers/capitalize';
+import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
 
 type PlaceCardProps = {
   blockName?: string;
   cardData: PlaceCardType;
   isPremium: boolean;
-  isMarked?: boolean;
   onMouseEnter?: (id: string) => void;
   onMouseLeave?: () => void;
 }
@@ -19,7 +20,6 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
     blockName,
     cardData,
     isPremium,
-    isMarked = false,
     onMouseEnter,
     onMouseLeave
   } = props;
@@ -30,13 +30,14 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
     price,
     rating,
     title,
-    type } = cardData;
+    type,
+    isFavorite } = cardData;
 
   const handleMouseEnter = () => {
     onMouseEnter?.(id);
   };
 
-  const [ marked, setIsMarked ] = useState(isMarked);
+  const [ marked, setIsMarked ] = useState(isFavorite);
 
   const markButtonClickHandle = useCallback(() => setIsMarked(!marked), [marked]);
 
@@ -52,7 +53,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
         </div>
       ) : null}
       <div className={`${blockName ? `${blockName}__image-wrapper` : ''} place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={`${AppRoute.Offer}${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -60,7 +61,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
             height={200}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -94,7 +95,9 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`${AppRoute.Offer}${id}`}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{capitalize(type)}</p>
       </div>

@@ -7,9 +7,9 @@ export type Location = {
 export type City = {
     name: string;
     location: Location;
-}
+};
 
-export type PlaceCardType = {
+export type OfferBaseType = {
     id: string;
     title: string;
     type: string;
@@ -19,5 +19,7 @@ export type PlaceCardType = {
     isFavorite: boolean;
     isPremium: boolean;
     rating: number;
-    previewImage: string;
 };
+
+export type PlaceCardType = OfferBaseType & {previewImage: string}
+
