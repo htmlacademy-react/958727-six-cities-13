@@ -1,4 +1,4 @@
-import { OfferBaseType } from './place-card';
+import { PlaceCardType } from './place-card';
 
 export type Host = {
     name: string;
@@ -6,7 +6,7 @@ export type Host = {
     isPro: boolean;
 }
 
-export type OfferCardType = OfferBaseType & {
+export type OfferCardType = Omit<PlaceCardType, 'previewImage'> & {
     description: string;
     bedrooms: number;
     goods: string[];
