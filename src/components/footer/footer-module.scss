@@ -1,0 +1,6 @@
+.footer__logo-link {
+    &:not(.header__logo-link--active):focus,
+    &:not(.header__logo-link--active):hover {
+        opacity:.5
+    }
+}

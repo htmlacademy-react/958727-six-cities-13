@@ -1,7 +1,3 @@
-export const Setting = {
-  cardsCount: 5,
-};
-
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',

@@ -7,13 +7,14 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
+import { PlaceCardType } from '../types/place-card';
 
 
 type AppProps = {
-    cardsCount: number;
+    cards: PlaceCardType[];
 }
 
-function App({cardsCount}: AppProps): JSX.Element {
+function App({cards}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +24,7 @@ function App({cardsCount}: AppProps): JSX.Element {
         >
           <Route
             index
-            element={<MainPage cardsCount={cardsCount} />}
+            element={<MainPage cards={cards} />}
           />
           <Route
             path={AppRoute.Login}
@@ -31,15 +32,15 @@ function App({cardsCount}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage />}
+            element={<OfferPage cards={cards}/>}
           />
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                authorizationStatus={AuthorizationStatus.NoAuth}
+                authorizationStatus={AuthorizationStatus.Auth}
               >
-                <FavoritesPage />
+                <FavoritesPage cards={cards}/>
               </PrivateRoute>
             }
           />

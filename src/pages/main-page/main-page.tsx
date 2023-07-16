@@ -1,10 +1,25 @@
-import PlaceCard from '../../components/place-card/place-card';
+import { useCallback, useState } from 'react';
+import { PlaceCardType } from '../../components/types/place-card';
+import { MemoizedPlaceCardList } from './../../components/place-card-list/memoized-place-card-list';
+import cn from 'classnames';
 
 type MainPageProps = {
-    cardsCount: number;
+    cards: PlaceCardType[];
   }
 
-function MainPage({cardsCount}: MainPageProps): JSX.Element {
+function MainPage({cards}: MainPageProps): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [ activeCard, setActiveCard ] = useState('');
+
+  const onMouseEnter = useCallback((id: string) => {
+    setActiveCard(id);
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    setActiveCard('');
+  }, []);
+
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -72,12 +87,17 @@ function MainPage({cardsCount}: MainPageProps): JSX.Element {
                 </li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {
-                [...Array(cardsCount).keys()]
-                  .map((item) => <PlaceCard key={item} className='cities__card'/>)
-              }
-            </div>
+            <MemoizedPlaceCardList
+              onMouseEnter={onMouseEnter}
+              onMouseLeave={onMouseLeave}
+              cards={cards}
+              className={cn(
+                'cities__places-list',
+                'places__list',
+                'tabs__content'
+              )}
+              cardBlockName='cities'
+            />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map" />

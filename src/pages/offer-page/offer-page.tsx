@@ -1,6 +1,12 @@
-import PlaceCard from '../../components/place-card/place-card';
+import { MemoizedPlaceCard } from '../../components/place-card/memoized-place-card';
+import { PlaceCardType } from '../../components/types/place-card';
 
-function OfferPage(): JSX.Element {
+type OfferPageProps = {
+  cards: PlaceCardType[];
+};
+
+function OfferPage(props: OfferPageProps): JSX.Element {
+  const cards = props.cards.slice(0, 3);
   return (
     <main className="page__main page__main--offer">
       <section className="offer">
@@ -280,8 +286,14 @@ function OfferPage(): JSX.Element {
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
             {
-              [...Array(3).keys()]
-                .map((item) => <PlaceCard key={item} className='near-places__card'/>)
+              cards.map((item) => (
+                <MemoizedPlaceCard
+                  key={item.id}
+                  blockName='near-places'
+                  cardData={item}
+                  isPremium={item.isPremium}
+                />
+              ))
             }
           </div>
         </section>
