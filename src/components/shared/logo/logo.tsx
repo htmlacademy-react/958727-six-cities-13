@@ -1,22 +1,28 @@
-
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 
-function Logo(): JSX.Element {
+type LogoProps = {
+  width: number;
+  height: number;
+  blockName: string;
+}
+
+function Logo(props: LogoProps): JSX.Element {
+  const { width, height, blockName } = props;
   return (
     <NavLink
       to={AppRoute.Root}
       className={({ isActive }) =>
         isActive ?
-          'header__logo-link header__logo-link--active'
-          : 'header__logo-link'}
+          `${blockName}__logo-link ${blockName}__logo-link--active`
+          : `${blockName}__logo-link`}
     >
       <img
-        className="header__logo"
+        className={`${blockName}__logo`}
         src="img/logo.svg"
         alt="6 cities logo"
-        width="81"
-        height="41"
+        width={width}
+        height={height}
       />
     </NavLink>
   );

@@ -1,7 +1,3 @@
-export const Setting = {
-  cardsCount: 5,
-};
-
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -13,4 +9,17 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+}
+
+export const RatingTitles = [
+  'perfect',
+  'good',
+  'not bad',
+  'badly',
+  'terribly'
+];
+
+export enum ReviewLength {
+  Min = 50,
+  Max = 300,
 }

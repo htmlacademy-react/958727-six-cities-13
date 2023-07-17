@@ -1,8 +1,9 @@
+import './not-found-page-module.scss';
 
 function NotFoundPage(): JSX.Element {
   return (
-    <main className="catalog" style={{marginBottom: 'auto', marginTop: 'auto'}}>
-      <h1 style={{textAlign: 'center'}}>Page Not Found</h1>
+    <main className="catalog not-found">
+      <h1 className="not-found__title">Page Not Found</h1>
     </main>
   );
 }

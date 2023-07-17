@@ -1,29 +1,81 @@
+
+import { PlaceCardType } from '../types/place-card';
+import { useState } from 'react';
+import cn from 'classnames';
+import { capitalize } from '../../helpers/capitalize';
+import { AppRoute } from '../../const';
+import { Link, generatePath } from 'react-router-dom';
+
 type PlaceCardProps = {
-  className?: string;
+  blockName?: string;
+  cardData: PlaceCardType;
+  isPremium: boolean;
+  onMouseEnter?: (id: string) => void;
+  onMouseLeave?: () => void;
 }
 
-function PlaceCard({className}: PlaceCardProps): JSX.Element {
+function PlaceCard(props: PlaceCardProps): JSX.Element {
+
+  const {
+    blockName,
+    cardData,
+    isPremium,
+    onMouseEnter,
+    onMouseLeave
+  } = props;
+
+  const {
+    id,
+    previewImage,
+    price,
+    rating,
+    title,
+    type,
+    isFavorite } = cardData;
+
+  const handleMouseEnter = () => {
+    onMouseEnter?.(id);
+  };
+
+  const [ marked, setIsMarked ] = useState(isFavorite);
+
+  const handleMarkButtonClick = () => setIsMarked(!marked);
+
   return (
-    <article className={`${className ? className : ''} place-card`}>
-      <div className="place-card__image-wrapper">
-        <a href="#">
+    <article
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className={`${blockName ? `${blockName}__card` : ''} place-card`}
+    >
+      {isPremium ? (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      ) : null}
+      <div className={`${blockName ? `${blockName}__image-wrapper` : ''} place-card__image-wrapper`}>
+        <Link to={generatePath(AppRoute.Offer, { id })}>
           <img
             className="place-card__image"
-            src="img/room.jpg"
+            src={previewImage}
             width={260}
             height={200}
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€80</b>
+            <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            onClick={handleMarkButtonClick}
+            className={cn(
+              'place-card__bookmark-button',
+              'button',
+              {'place-card__bookmark-button--active' : marked}
+            )}
             type="button"
           >
             <svg
@@ -38,14 +90,16 @@ function PlaceCard({className}: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }} />
+            <span style={{ width: `${rating * 20}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Wood and stone place</a>
+          <Link to={generatePath(AppRoute.Offer, { id })}>
+            {title}
+          </Link>
         </h2>
-        <p className="place-card__type">Private room</p>
+        <p className="place-card__type">{capitalize(type)}</p>
       </div>
     </article>
   );

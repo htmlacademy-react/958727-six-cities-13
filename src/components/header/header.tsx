@@ -1,6 +1,6 @@
 import { AppRoute, AuthorizationStatus } from '../../const';
-import Logo from '../shared/logo/logo';
 import { Link } from 'react-router-dom';
+import Logo from '../shared/logo/logo';
 
 type HeaderProps = {
     authorizationStatus: AuthorizationStatus;
@@ -13,7 +13,7 @@ function Header(props: HeaderProps): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo/>
+            <Logo width={81} height={41} blockName='header'/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
