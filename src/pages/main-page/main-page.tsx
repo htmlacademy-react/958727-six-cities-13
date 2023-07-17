@@ -1,15 +1,14 @@
 import { useCallback, useState } from 'react';
 import { PlaceCardType } from '../../components/types/place-card';
-import { MemoizedPlaceCardList } from './../../components/place-card-list/memoized-place-card-list';
 import cn from 'classnames';
+import PlaceCardList from '../../components/place-card-list/place-card-list';
 
 type MainPageProps = {
     cards: PlaceCardType[];
   }
 
 function MainPage({cards}: MainPageProps): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [ activeCard, setActiveCard ] = useState('');
+  const [, setActiveCard ] = useState('');
 
   const onMouseEnter = useCallback((id: string) => {
     setActiveCard(id);
@@ -87,7 +86,7 @@ function MainPage({cards}: MainPageProps): JSX.Element {
                 </li>
               </ul>
             </form>
-            <MemoizedPlaceCardList
+            <PlaceCardList
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
               cards={cards}

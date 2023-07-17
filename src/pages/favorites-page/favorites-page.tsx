@@ -11,10 +11,12 @@ type FavoritesPageProps = {
 function FavoritesPage(props: FavoritesPageProps): JSX.Element {
   const { cards } = props;
 
-  const cardNames = Array.from(new Set(cards.reduce((acc: string[], cur) => {
-    acc.push(cur.city.name);
+  const cardNames = cards.reduce((acc: string[], cur) => {
+    if (!acc.includes(cur.city.name)) {
+      acc.push(cur.city.name);
+    }
     return acc;
-  }, [])));
+  }, []);
   return (
     <>
       <main className="page__main page__main--favorites">
@@ -33,14 +35,14 @@ function FavoritesPage(props: FavoritesPageProps): JSX.Element {
                       </div>
                     </div>
                     <div className="favorites__places">
-                      {cards.map((card) => card.city.name === name ? (
+                      {cards.map((card) => card.city.name === name && (
                         <MemoizedPlaceCard
                           key={card.id}
                           blockName='favorites'
                           cardData={card}
                           isPremium={card.isPremium}
                         />
-                      ) : null
+                      )
                       )}
                     </div>
                   </li>

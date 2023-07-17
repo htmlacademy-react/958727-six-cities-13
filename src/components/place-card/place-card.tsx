@@ -1,10 +1,10 @@
 
 import { PlaceCardType } from '../types/place-card';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import cn from 'classnames';
 import { capitalize } from '../../helpers/capitalize';
 import { AppRoute } from '../../const';
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 
 type PlaceCardProps = {
   blockName?: string;
@@ -39,7 +39,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
 
   const [ marked, setIsMarked ] = useState(isFavorite);
 
-  const markButtonClickHandle = useCallback(() => setIsMarked(!marked), [marked]);
+  const handleMarkButtonClick = () => setIsMarked(!marked);
 
   return (
     <article
@@ -53,7 +53,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
         </div>
       ) : null}
       <div className={`${blockName ? `${blockName}__image-wrapper` : ''} place-card__image-wrapper`}>
-        <Link to={`${AppRoute.Offer}${id}`}>
+        <Link to={generatePath(AppRoute.Offer, { id })}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -70,7 +70,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            onClick={markButtonClickHandle}
+            onClick={handleMarkButtonClick}
             className={cn(
               'place-card__bookmark-button',
               'button',
@@ -95,7 +95,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}${id}`}>
+          <Link to={generatePath(AppRoute.Offer, { id })}>
             {title}
           </Link>
         </h2>

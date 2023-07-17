@@ -1,6 +1,6 @@
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Link } from 'react-router-dom';
-import { MemoizedLogo } from '../shared/logo/memoized-logo';
+import Logo from '../shared/logo/logo';
 
 type HeaderProps = {
     authorizationStatus: AuthorizationStatus;
@@ -13,7 +13,7 @@ function Header(props: HeaderProps): JSX.Element {
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <MemoizedLogo width={81} height={41} blockName='header'/>
+            <Logo width={81} height={41} blockName='header'/>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">

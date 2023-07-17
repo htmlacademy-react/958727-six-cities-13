@@ -1,21 +1,13 @@
-export type Location = {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-};
-
-export type City = {
-    name: string;
-    location: Location;
-};
+import { CityType } from './city';
+import { LocationType } from './location';
 
 export type PlaceCardType = {
     id: string;
     title: string;
     type: string;
     price: number;
-    city: City;
-    location: Location;
+    city: CityType;
+    location: LocationType;
     isFavorite: boolean;
     isPremium: boolean;
     rating: number;

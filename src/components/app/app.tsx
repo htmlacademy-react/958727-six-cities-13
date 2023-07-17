@@ -33,7 +33,7 @@ function App({cards, offer}: AppProps): JSX.Element {
             element={<LoginPage authorizationStatus={AuthorizationStatus.Auth}/>}
           />
           <Route
-            path={`${AppRoute.Offer}:id`}
+            path={`${AppRoute.Offer}`}
             element={
               <OfferPage
                 cards={cards}

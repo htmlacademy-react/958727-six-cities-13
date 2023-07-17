@@ -1,7 +1,7 @@
 import { MemoizedPlaceCard } from '../../components/place-card/memoized-place-card';
 import { OfferCardType } from '../../components/types/offer-card';
 import { PlaceCardType } from '../../components/types/place-card';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 import ReviewForm from '../../components/review-form/review-form';
 
@@ -17,7 +17,7 @@ function OfferPage(props: OfferPageProps): JSX.Element {
 
   const [ marked, setIsMarked ] = useState(offer.isFavorite);
 
-  const markButtonClickHandle = useCallback(() => setIsMarked(!marked), [marked]);
+  const handleMarkButtonClick = () => setIsMarked(!marked);
 
   return (
     <main className="page__main page__main--offer">
@@ -36,13 +36,17 @@ function OfferPage(props: OfferPageProps): JSX.Element {
         </div>
         <div className="offer__container container">
           <div className="offer__wrapper">
-            <div className="offer__mark">
-              <span>{offer.isPremium}</span>
-            </div>
+            {
+              offer.isPremium && (
+                <div className="offer__mark">
+                  <span>Premium</span>
+                </div>
+              )
+            }
             <div className="offer__name-wrapper">
               <h1 className="offer__name">{offer.title}</h1>
               <button
-                onClick={markButtonClickHandle}
+                onClick={handleMarkButtonClick}
                 className="offer__bookmark-button button"
                 type="button"
               >
