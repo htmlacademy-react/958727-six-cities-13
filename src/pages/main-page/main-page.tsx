@@ -2,20 +2,21 @@ import { useCallback, useState } from 'react';
 import { PlaceCardType } from '../../components/types/place-card';
 import cn from 'classnames';
 import PlaceCardList from '../../components/place-card-list/place-card-list';
+import Map from './../../components/map/map';
 
 type MainPageProps = {
     cards: PlaceCardType[];
   }
 
 function MainPage({cards}: MainPageProps): JSX.Element {
-  const [, setActiveCard ] = useState('');
+  const [activeCardId, setActiveCardId ] = useState('');
 
   const onMouseEnter = useCallback((id: string) => {
-    setActiveCard(id);
+    setActiveCardId(id);
   }, []);
 
   const onMouseLeave = useCallback(() => {
-    setActiveCard('');
+    setActiveCardId('');
   }, []);
 
 
@@ -99,7 +100,13 @@ function MainPage({cards}: MainPageProps): JSX.Element {
             />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map" />
+            <section className="cities__map map">
+              <Map
+                selectedPointId={activeCardId}
+                cards={cards}
+                city={cards[0].city}
+              />
+            </section>
           </div>
         </div>
       </div>

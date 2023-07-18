@@ -23,3 +23,9 @@ export enum ReviewLength {
   Min = 50,
   Max = 300,
 }
+
+export const URL_PIN_DEFAULT =
+  'src/assets/icons/pin.svg';
+
+export const URL_PIN_CURRENT =
+  'src/assets/icons/pin-active.svg';
