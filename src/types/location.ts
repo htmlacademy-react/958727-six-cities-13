@@ -3,3 +3,8 @@ export type LocationType = {
     longitude: number;
     zoom: number;
 };
+
+export type LocationItemType = {
+    id: string;
+    location: LocationType;
+};

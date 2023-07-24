@@ -3,12 +3,11 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
 import { URL_PIN_DEFAULT, URL_PIN_CURRENT } from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { CityType } from '../types/city';
-import { PlaceCardType } from '../types/place-card';
+import { LocationType, LocationItemType } from '../../types/location';
 
 type MapProps = {
-  city: CityType;
-  cards: PlaceCardType[];
+  mainLocation: LocationType;
+  locations: LocationItemType[];
   selectedPointId: string | undefined;
 };
 
@@ -25,23 +24,23 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, cards, selectedPointId} = props;
+  const {mainLocation, locations, selectedPointId} = props;
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, mainLocation);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
-      cards.forEach((card) => {
+      locations.forEach((item) => {
         const marker = new Marker({
-          lat: card.location.latitude,
-          lng: card.location.longitude
+          lat: item.location.latitude,
+          lng: item.location.longitude
         });
 
         marker
           .setIcon(
-            selectedPointId !== undefined && card.id === selectedPointId
+            selectedPointId !== undefined && location.id === selectedPointId
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -52,7 +51,7 @@ function Map(props: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, cards, selectedPointId]);
+  }, [map, selectedPointId, locations]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }
