@@ -8,6 +8,7 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceCardList from './../../components/place-card-list/place-card-list';
 import cn from 'classnames';
 import Map from '../../components/map/map';
+import { RATING_AMPLIFIER } from '../../const';
 
 type OfferPageProps = {
   cards: PlaceCardType[];
@@ -19,6 +20,11 @@ type OfferPageProps = {
 function OfferPage(props: OfferPageProps): JSX.Element {
   const { cards: cardsFromProps, offer, reviews, authorizationStatus } = props;
   const cards = cardsFromProps.slice(1, 4);
+  const locationForMap = cards[0].city.location;
+  const offerLocations = cards.map((card) => ({
+    id: card.id,
+    location: card.location
+  }));
 
   const [ marked, setIsMarked ] = useState(offer.isFavorite);
 
@@ -63,7 +69,7 @@ function OfferPage(props: OfferPageProps): JSX.Element {
             </div>
             <div className="offer__rating rating">
               <div className="offer__stars rating__stars">
-                <span style={{ width: `${offer.rating * 20}%` }} />
+                <span style={{ width: `${offer.rating * RATING_AMPLIFIER}%` }} />
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="offer__rating-value rating__value">{offer.rating}</span>
@@ -122,8 +128,8 @@ function OfferPage(props: OfferPageProps): JSX.Element {
         <section className="offer__map map">
           <Map
             selectedPointId={offer.id}
-            cards={[{...offer, previewImage: ''}, ...cards]}
-            city={cards[0].city}
+            locations={offerLocations}
+            mainLocation={locationForMap}
           />
         </section>
       </section>

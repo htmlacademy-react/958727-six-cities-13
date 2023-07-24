@@ -25,3 +25,4 @@ export const URL_PIN_DEFAULT =
 export const URL_PIN_CURRENT =
   'src/assets/icons/pin-active.svg';
 export const LAYER_TYPE_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+export const RATING_AMPLIFIER = 20;

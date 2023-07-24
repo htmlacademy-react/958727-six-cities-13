@@ -3,7 +3,7 @@ import { PlaceCardType } from '../types/place-card';
 import { useState } from 'react';
 import cn from 'classnames';
 import { capitalize } from '../../helpers/capitalize';
-import { AppRoute } from '../../const';
+import { AppRoute, RATING_AMPLIFIER } from '../../const';
 import { Link, generatePath } from 'react-router-dom';
 
 type PlaceCardProps = {
@@ -90,7 +90,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * 20}%` }} />
+            <span style={{ width: `${rating * RATING_AMPLIFIER}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

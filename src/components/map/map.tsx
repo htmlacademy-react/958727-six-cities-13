@@ -3,7 +3,7 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
 import { URL_PIN_DEFAULT, URL_PIN_CURRENT } from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { LocationType, LocationItemType } from '../types/location';
+import { LocationType, LocationItemType } from '../../components/types/location';
 
 type MapProps = {
   mainLocation: LocationType;
