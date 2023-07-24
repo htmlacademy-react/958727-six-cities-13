@@ -1,5 +1,5 @@
 
-import { PlaceCardType } from '../types/place-card';
+import { PlaceCardType } from '../../types/place-card';
 import { useState } from 'react';
 import cn from 'classnames';
 import { capitalize } from '../../helpers/capitalize';

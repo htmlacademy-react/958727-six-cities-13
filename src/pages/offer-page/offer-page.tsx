@@ -1,9 +1,9 @@
-import { OfferCardType } from '../../components/types/offer-card';
-import { PlaceCardType } from '../../components/types/place-card';
+import { OfferCardType } from '../../types/offer-card';
+import { PlaceCardType } from '../../types/place-card';
 import { useState } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 import ReviewForm from '../../components/review-form/review-form';
-import { ReviewType } from '../../components/types/review';
+import { ReviewType } from '../../types/review';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import PlaceCardList from './../../components/place-card-list/place-card-list';
 import cn from 'classnames';

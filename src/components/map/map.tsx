@@ -3,8 +3,8 @@ import { Icon, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map';
 import { URL_PIN_DEFAULT, URL_PIN_CURRENT } from '../../const';
 import 'leaflet/dist/leaflet.css';
-import { CityType } from '../types/city';
-import { PlaceCardType } from '../types/place-card';
+import { CityType } from '../../types/city';
+import { PlaceCardType } from '../../types/place-card';
 
 type MapProps = {
   city: CityType;
