@@ -1,6 +1,6 @@
 import { MemoizedPlaceCard } from '../../components/place-card/memoized-place-card';
-import { OfferCardType } from '../../types/offer-card';
-import { PlaceCardType } from '../../types/place-card';
+import { OfferCardType } from '../../components/types/offer-card';
+import { PlaceCardType } from '../../components/types/place-card';
 import { useState } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 import ReviewForm from '../../components/review-form/review-form';

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MemoizedFooter } from '../../components/footer/memoized-footer';
 import { MemoizedPlaceCard } from '../../components/place-card/memoized-place-card';
-import { PlaceCardType } from '../../types/place-card';
+import { PlaceCardType } from '../../components/types/place-card';
 import { AppRoute } from '../../const';
 
 type FavoritesPageProps = {

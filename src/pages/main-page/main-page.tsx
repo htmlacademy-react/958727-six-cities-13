@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { PlaceCardType } from '../../types/place-card';
+import { PlaceCardType } from '../../components/types/place-card';
 import cn from 'classnames';
 import PlaceCardList from '../../components/place-card-list/place-card-list';
 import Map from './../../components/map/map';

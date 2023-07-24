@@ -1,5 +1,5 @@
 import { MemoizedPlaceCard } from '../place-card/memoized-place-card';
-import { PlaceCardType } from '../../types/place-card';
+import { PlaceCardType } from '../types/place-card';
 
 type PlaceCardListProps = {
     className?: string;
