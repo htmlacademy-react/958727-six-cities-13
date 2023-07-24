@@ -7,8 +7,8 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
-import { PlaceCardType } from '../types/place-card';
-import { OfferCardType } from '../types/offer-card';
+import { PlaceCardType } from '../../types/place-card';
+import { OfferCardType } from '../../types/offer-card';
 
 
 type AppProps = {
