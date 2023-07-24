@@ -1,12 +1,12 @@
 import { MemoizedPlaceCard } from '../place-card/memoized-place-card';
-import { PlaceCardType } from '../../types/place-card';
+import { PlaceCardType } from '../types/place-card';
 
 type PlaceCardListProps = {
     className?: string;
     cards: PlaceCardType[];
     cardBlockName?: string;
-    onMouseEnter: (id: string) => void;
-    onMouseLeave: () => void;
+    onMouseEnter?: (id: string) => void;
+    onMouseLeave?: () => void;
   }
 
 function PlaceCardList(props: PlaceCardListProps): JSX.Element {

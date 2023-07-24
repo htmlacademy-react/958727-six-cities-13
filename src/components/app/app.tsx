@@ -7,16 +7,18 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
-import { PlaceCardType } from '../../types/place-card';
-import { OfferCardType } from '../../types/offer-card';
+import { PlaceCardType } from '../../components/types/place-card';
+import { OfferCardType } from '../../components/types/offer-card';
+import { ReviewType } from '../../components/types/review';
 
 
 type AppProps = {
     cards: PlaceCardType[];
     offer: OfferCardType;
+    reviews: ReviewType[];
 }
 
-function App({cards, offer}: AppProps): JSX.Element {
+function App({cards, offer, reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -38,6 +40,7 @@ function App({cards, offer}: AppProps): JSX.Element {
               <OfferPage
                 cards={cards}
                 offer={offer}
+                reviews={reviews}
                 authorizationStatus={AuthorizationStatus.Auth}
               />
             }
