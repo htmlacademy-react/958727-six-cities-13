@@ -21,10 +21,9 @@ function useMap(
         zoom: zoom
       });
 
-      const layer = new TileLayer(LAYER_ATTRIBUTION_LINK,
+      const layer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
         {
           attribution: LAYER_TYPE_URL
-
         });
 
       instance.addLayer(layer);
