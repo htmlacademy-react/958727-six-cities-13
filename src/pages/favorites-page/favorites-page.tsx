@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom';
 import { MemoizedFooter } from '../../components/footer/memoized-footer';
 import { MemoizedPlaceCard } from '../../components/place-card/memoized-place-card';
-import { PlaceCardType } from '../../types/place-card';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { getOffers } from '../../store/offers-data/selectors';
 
-type FavoritesPageProps = {
-  cards: PlaceCardType[];
-}
-
-function FavoritesPage(props: FavoritesPageProps): JSX.Element {
-  const { cards } = props;
+function FavoritesPage(): JSX.Element {
+  const cards = useAppSelector(getOffers);
 
   const cardNames = cards.reduce((acc: string[], cur) => {
     if (!acc.includes(cur.city.name)) {

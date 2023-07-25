@@ -1,6 +1,6 @@
 import { RATING_AMPLIFIER } from '../../const';
-import { formatDate } from '../../helpers/capitalize';
-import { ReviewType } from '../types/review';
+import { formatDate } from '../../helpers/format-date';
+import { ReviewType } from '../../types/review';
 
 type ReviewsProps = {
     review: ReviewType;

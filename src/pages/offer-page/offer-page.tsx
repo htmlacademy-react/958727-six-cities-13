@@ -1,5 +1,4 @@
 import { OfferCardType } from '../../types/offer-card';
-import { PlaceCardType } from '../../types/place-card';
 import { useState } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 import ReviewForm from '../../components/review-form/review-form';
@@ -9,17 +8,19 @@ import PlaceCardList from './../../components/place-card-list/place-card-list';
 import cn from 'classnames';
 import Map from '../../components/map/map';
 import { RATING_AMPLIFIER } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { getOffers } from '../../store/offers-data/selectors';
 
 type OfferPageProps = {
-  cards: PlaceCardType[];
   offer: OfferCardType;
   reviews: ReviewType[];
   authorizationStatus: string;
 };
 
 function OfferPage(props: OfferPageProps): JSX.Element {
-  const { cards: cardsFromProps, offer, reviews, authorizationStatus } = props;
-  const cards = cardsFromProps.slice(1, 4);
+  const { offer, reviews, authorizationStatus } = props;
+  const cardsFromStore = useAppSelector(getOffers);
+  const cards = cardsFromStore.slice(1, 4);
   const locationForMap = cards[0].city.location;
   const offerLocations = cards.map((card) => ({
     id: card.id,
