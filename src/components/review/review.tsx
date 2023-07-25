@@ -1,4 +1,6 @@
-import { ReviewType } from '../../types/review';
+import { RATING_AMPLIFIER } from '../../const';
+import { formatDate } from '../../helpers/capitalize';
+import { ReviewType } from '../types/review';
 
 type ReviewsProps = {
     review: ReviewType;
@@ -25,13 +27,13 @@ function Review({review}: ReviewsProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${review.rating * 20}%` }} />
+            <span style={{ width: `${review.rating * RATING_AMPLIFIER}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">{review.comment}</p>
         <time className="reviews__time" dateTime={review.date}>
-          {`${date.toLocaleString('en-us',{month:'long', year:'numeric'})}`}
+          {`${formatDate(date)}`}
         </time>
       </div>
     </>
