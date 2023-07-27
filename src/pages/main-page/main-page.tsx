@@ -7,6 +7,7 @@ import { getCity, getOffers } from '../../store/offers-data/selectors';
 import CityList from '../../components/city-list/city-list';
 import { LocationItemType } from '../../types/location';
 import { PlaceCardType } from '../../types/place-card';
+import Sorting from '../../components/sorting/sorting';
 
 const createOfferLocations = (offers: PlaceCardType[]): LocationItemType[] => offers.map((offer) => ({
   id: offer.id,
@@ -17,7 +18,7 @@ function MainPage(): JSX.Element {
   const [activeCardId, setActiveCardId ] = useState('');
   const activeCity = useAppSelector(getCity);
   const cards = useAppSelector(getOffers);
-  const filteredCards = cards.filter((card) => card.city.name === activeCity);
+  const filteredCards = [...cards].filter((card) => card.city.name === activeCity);
   const isFilteredCards = filteredCards.length !== 0;
   const locationForMap = isFilteredCards ? filteredCards[0].city.location : cards[0].city.location;
   const offerLocations = isFilteredCards ? createOfferLocations(filteredCards) : createOfferLocations(cards);
@@ -46,29 +47,7 @@ function MainPage(): JSX.Element {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{filteredCards.length} places to stay in {activeCity}</b>
-        <form className="places__sorting" action="#" method="get">
-          <span className="places__sorting-caption">Sort by</span>
-          <span className="places__sorting-type" tabIndex={0}>
-          Popular
-            <svg className="places__sorting-arrow" width={7} height={4}>
-              <use xlinkHref="#icon-arrow-select" />
-            </svg>
-          </span>
-          <ul className="places__options places__options--custom places__options--opened">
-            <li className="places__option places__option--active" tabIndex={0}>
-        Popular
-            </li>
-            <li className="places__option" tabIndex={0}>
-        Price: low to high
-            </li>
-            <li className="places__option" tabIndex={0}>
-        Price: high to low
-            </li>
-            <li className="places__option" tabIndex={0}>
-        Top rated first
-            </li>
-          </ul>
-        </form>
+        <Sorting cards={cards}/>
         <PlaceCardList
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
@@ -101,7 +80,7 @@ function MainPage(): JSX.Element {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CityList cards={cards}/>
+          <CityList />
         </section>
       </div>
       <div className="cities">

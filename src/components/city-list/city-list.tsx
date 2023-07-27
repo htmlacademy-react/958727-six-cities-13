@@ -2,17 +2,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCity } from '../../store/offers-data/offers-data';
 import { getCity } from '../../store/offers-data/selectors';
 import cn from 'classnames';
-import { PlaceCardType } from '../../types/place-card';
+import { Cities } from '../../const';
 
-type CityListProps = {
-    cards: PlaceCardType[];
-}
-
-function CityList({ cards }: CityListProps): JSX.Element {
+function CityList(): JSX.Element {
 
   const activeCity = useAppSelector(getCity);
-  const cities = new Set(cards.map((card) => card.city.name));
-  cities.add('Paris');
+  const cities = Object.keys(Cities);
   const dispatch = useAppDispatch();
 
   const handleCityClick = (cityName: string) => (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {

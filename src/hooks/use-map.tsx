@@ -12,25 +12,31 @@ function useMap(
   const {latitude, longitude, zoom} = location;
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
-      const instance = new Map(mapRef.current, {
-        center: {
-          lat: latitude,
-          lng: longitude
-        },
-        zoom: zoom
-      });
 
-      const layer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        {
-          attribution: LAYER_TYPE_URL
+    let isMounted = true;
+    if (isMounted) {
+      if (mapRef.current !== null && !isRenderedRef.current) {
+        const instance = new Map(mapRef.current, {
+          center: {
+            lat: latitude,
+            lng: longitude
+          },
+          zoom: zoom
         });
+        const layer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+          {
+            attribution: LAYER_TYPE_URL
+          });
 
-      instance.addLayer(layer);
+        instance.addLayer(layer);
 
-      setMap(instance);
-      isRenderedRef.current = true;
+        setMap(instance);
+        isRenderedRef.current = true;
+      }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [mapRef, latitude, longitude, zoom]);
 
   return map;

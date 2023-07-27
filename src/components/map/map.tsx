@@ -25,7 +25,6 @@ const currentCustomIcon = new Icon({
 
 function Map(props: MapProps): JSX.Element {
   const {mainLocation, locations, selectedPointId} = props;
-
   const mapRef = useRef(null);
   const map = useMap(mapRef, mainLocation);
 
