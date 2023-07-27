@@ -1,7 +1,7 @@
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import { Map, TileLayer } from 'leaflet';
 import { LocationType } from '../types/location';
-import { LAYER_TYPE_URL } from '../const';
+import { LAYER_ATTRIBUTION, LAYER_TYPE_URL } from '../const';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
@@ -23,9 +23,9 @@ function useMap(
           },
           zoom: zoom
         });
-        const layer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        const layer = new TileLayer(LAYER_TYPE_URL,
           {
-            attribution: LAYER_TYPE_URL
+            attribution: LAYER_ATTRIBUTION
           });
 
         instance.addLayer(layer);
