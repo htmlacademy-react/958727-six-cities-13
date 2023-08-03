@@ -3,21 +3,15 @@ import cn from 'classnames';
 import PlaceCardList from '../../components/place-card-list/place-card-list';
 import Map from './../../components/map/map';
 import { useAppSelector } from '../../hooks';
-import { getCity, getOffers } from '../../store/offers-data/selectors';
+import { getCity, getFilteredCards, getOffers } from '../../store/offers-data/selectors';
 import CityList from '../../components/city-list/city-list';
-import { LocationItemType } from '../../types/location';
-import { PlaceCardType } from '../../types/place-card';
-
-const createOfferLocations = (offers: PlaceCardType[]): LocationItemType[] => offers.map((offer) => ({
-  id: offer.id,
-  location: offer.location
-}));
+import { createOfferLocations } from '../../helpers/create-offer-locations';
 
 function MainPage(): JSX.Element {
   const [activeCardId, setActiveCardId ] = useState('');
   const activeCity = useAppSelector(getCity);
   const cards = useAppSelector(getOffers);
-  const filteredCards = cards.filter((card) => card.city.name === activeCity);
+  const filteredCards = useAppSelector(getFilteredCards);
   const isFilteredCards = filteredCards.length !== 0;
   const locationForMap = isFilteredCards ? filteredCards[0].city.location : cards[0].city.location;
   const offerLocations = isFilteredCards ? createOfferLocations(filteredCards) : createOfferLocations(cards);

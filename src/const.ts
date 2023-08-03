@@ -35,4 +35,6 @@ export enum NameSpace {
   Offers = 'OFFERS',
 }
 
+export const INITIAL_CITY = 'Paris';
+
 

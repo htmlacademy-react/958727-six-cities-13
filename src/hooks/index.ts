@@ -1,3 +1,3 @@
-export {useAppDispatch} from './use-app-dispatch';
-export { useMap } from './use-map';
-export { useAppSelector } from './use-app-selector';
+export * from './use-app-dispatch';
+export * from './use-map';
+export * from './use-app-selector';
