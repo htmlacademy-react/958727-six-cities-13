@@ -1,12 +1,12 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {NameSpace} from '../../const';
+import {INITIAL_CITY, NameSpace} from '../../const';
 import {OffersDataType} from '../../types/state';
 import { offers } from '../../mocks/offers';
 import { PlaceCardType } from '../../types/place-card';
 
 const initialState: OffersDataType = {
   offers: offers,
-  city: 'Paris',
+  city: INITIAL_CITY,
 };
 
 export const offersData = createSlice({

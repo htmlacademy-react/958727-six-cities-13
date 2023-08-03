@@ -53,4 +53,6 @@ export const LAYER_ATTRIBUTION =
 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 export const RATING_AMPLIFIER = 20;
 
+export const INITIAL_CITY = 'Paris';
+
 
