@@ -1,6 +1,6 @@
 import { useEffect, useState, MutableRefObject, useRef } from 'react';
 import { Map, TileLayer } from 'leaflet';
-import { LocationType } from '../components/types/location';
+import { LocationType } from '../types/location';
 import { LAYER_TYPE_URL } from '../const';
 
 function useMap(
@@ -36,4 +36,4 @@ function useMap(
   return map;
 }
 
-export default useMap;
+export { useMap };

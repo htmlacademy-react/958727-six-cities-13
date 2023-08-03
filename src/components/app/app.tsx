@@ -7,38 +7,35 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Layout from '../layout/layout';
-import { PlaceCardType } from '../../components/types/place-card';
-import { OfferCardType } from '../../components/types/offer-card';
-import { ReviewType } from '../../components/types/review';
+import { OfferCardType } from '../../types/offer-card';
+import { ReviewType } from '../../types/review';
 
 
 type AppProps = {
-    cards: PlaceCardType[];
     offer: OfferCardType;
     reviews: ReviewType[];
 }
 
-function App({cards, offer, reviews}: AppProps): JSX.Element {
+function App({offer, reviews}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<Layout/>}
+          element={<Layout />}
         >
           <Route
             index
-            element={<MainPage cards={cards} />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Login}
-            element={<LoginPage authorizationStatus={AuthorizationStatus.Auth}/>}
+            element={<LoginPage authorizationStatus={AuthorizationStatus.Auth} />}
           />
           <Route
             path={`${AppRoute.Offer}`}
             element={
               <OfferPage
-                cards={cards}
                 offer={offer}
                 reviews={reviews}
                 authorizationStatus={AuthorizationStatus.Auth}
@@ -51,7 +48,7 @@ function App({cards, offer, reviews}: AppProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
               >
-                <FavoritesPage cards={cards}/>
+                <FavoritesPage />
               </PrivateRoute>
             }
           />
