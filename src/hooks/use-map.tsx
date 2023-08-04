@@ -32,12 +32,14 @@ function useMap(
 
         setMap(instance);
         isRenderedRef.current = true;
+      } else {
+        map?.setView([latitude, longitude], zoom);
       }
     }
     return () => {
       isMounted = false;
     };
-  }, [mapRef, latitude, longitude, zoom]);
+  }, [mapRef, latitude, longitude, zoom, map]);
 
   return map;
 }

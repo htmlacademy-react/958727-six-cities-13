@@ -3,19 +3,19 @@ import cn from 'classnames';
 import PlaceCardList from '../../components/place-card-list/place-card-list';
 import Map from './../../components/map/map';
 import { useAppSelector } from '../../hooks';
-import { getCity, getFilteredCards, getOffers } from '../../store/offers-data/selectors';
+import { getCity, getFilterType, getSortedCards } from '../../store/offers-data/selectors';
 import CityList from '../../components/city-list/city-list';
 import Sorting from '../../components/sorting/sorting';
 import { createOfferLocations } from '../../helpers/create-offer-locations';
 
 function MainPage(): JSX.Element {
-  const [activeCardId, setActiveCardId ] = useState('');
+  const [activeCardId, setActiveCardId] = useState('');
   const activeCity = useAppSelector(getCity);
-  const cards = useAppSelector(getOffers);
-  const filteredCards = useAppSelector(getFilteredCards);
-  const isFilteredCards = filteredCards.length !== 0;
-  const locationForMap = isFilteredCards ? filteredCards[0].city.location : cards[0].city.location;
-  const offerLocations = isFilteredCards ? createOfferLocations(filteredCards) : createOfferLocations(cards);
+  const cards = useAppSelector(getSortedCards);
+  const filter = useAppSelector(getFilterType);
+  const isCards = cards.length !== 0;
+  const locationForMap = cards[0].city.location;
+  const offerLocations = createOfferLocations(cards);
 
   const onMouseEnter = useCallback((id: string) => {
     setActiveCardId(id);
@@ -30,7 +30,7 @@ function MainPage(): JSX.Element {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">
-          {filteredCards.length} places to stay in {activeCity}
+          {cards.length} places to stay in {activeCity}
         </b>
       </section>
     </div>
@@ -40,12 +40,12 @@ function MainPage(): JSX.Element {
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{filteredCards.length} places to stay in {activeCity}</b>
-        <Sorting cards={cards}/>
+        <b className="places__found">{cards.length} places to stay in {activeCity}</b>
+        <Sorting filter={filter}/>
         <PlaceCardList
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          cards={filteredCards}
+          cards={cards}
           className={cn(
             'cities__places-list',
             'places__list',
@@ -78,7 +78,7 @@ function MainPage(): JSX.Element {
         </section>
       </div>
       <div className="cities">
-        {isFilteredCards ? offersContainer : noPlacesFound}
+        {isCards ? offersContainer : noPlacesFound}
       </div>
     </main>
 

@@ -25,10 +25,10 @@ export enum ReviewLength {
 }
 
 export enum SortingOptions {
-  popular = 'Popular',
-  priceLowToHigh = 'Price: low to high',
-  priceHighToLow = 'Price: high to low',
-  topRatedFirst = 'Top rated first',
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
 }
 
 export enum NameSpace {
@@ -45,7 +45,6 @@ export enum Cities {
 }
 
 export const URL_PIN_DEFAULT = 'src/assets/icons/pin.svg';
-
 export const URL_PIN_CURRENT = 'src/assets/icons/pin-active.svg';
 export const LAYER_TYPE_URL =
 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
@@ -53,6 +52,5 @@ export const LAYER_ATTRIBUTION =
 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 export const RATING_AMPLIFIER = 20;
 
-export const INITIAL_CITY = 'Paris';
-
-
+export const INITIAL_CITY = Cities.Paris;
+export const INITIAL_FILTER_TYPE = SortingOptions.Popular;

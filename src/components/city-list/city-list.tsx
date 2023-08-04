@@ -10,7 +10,7 @@ function CityList(): JSX.Element {
   const cities = Object.keys(Cities);
   const dispatch = useAppDispatch();
 
-  const handleCityClick = (cityName: string) => (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
+  const handleCityClick = (cityName: Cities) => (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
     evt.preventDefault();
     dispatch(setCity(cityName));
   };

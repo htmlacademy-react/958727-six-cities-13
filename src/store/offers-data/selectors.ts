@@ -1,12 +1,16 @@
-import { NameSpace } from '../../const';
+import { NameSpace, SortingOptions } from '../../const';
+import { sortCards } from '../../helpers/sortCards';
 import { PlaceCardType } from '../../types/place-card';
 import {State} from '../../types/state';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const getOffers = (state: State): PlaceCardType[] => state[NameSpace.Offers].offers;
 export const getCity = (state: State): string => state[NameSpace.Offers].city;
-export const getFilteredCards = createSelector(
+export const getFilterType = (state: State): SortingOptions => state[NameSpace.Offers].filterType;
+export const getSortedCards = createSelector(
   getOffers,
+  getFilterType,
   getCity,
-  (offers, city) => offers.filter((card) => card.city.name === city)
+  (offers, filter, city) => sortCards([...offers], filter).filter((card) => card.city.name === city)
 );
+
