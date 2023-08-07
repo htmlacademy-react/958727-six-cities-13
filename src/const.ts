@@ -44,6 +44,12 @@ export enum Cities {
   Dusseldorf = 'Dusseldorf',
 }
 
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export const URL_PIN_DEFAULT = 'src/assets/icons/pin.svg';
 export const URL_PIN_CURRENT = 'src/assets/icons/pin-active.svg';
 export const LAYER_TYPE_URL =
@@ -54,3 +60,6 @@ export const RATING_AMPLIFIER = 20;
 
 export const INITIAL_CITY = Cities.Paris;
 export const INITIAL_FILTER_TYPE = SortingOptions.Popular;
+export const BASE_URL = 'https://13.design.pages.academy/six-cities';
+export const REQUEST_TIMEOUT = 5000;
+export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
