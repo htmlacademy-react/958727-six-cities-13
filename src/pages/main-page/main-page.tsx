@@ -2,13 +2,12 @@ import { useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
 import PlaceCardList from '../../components/place-card-list/place-card-list';
 import Map from './../../components/map/map';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCity, getFilterType, getIsOffersLoading, getSortedCards } from '../../store/offers-data/selectors';
 import CityList from '../../components/city-list/city-list';
 import Sorting from '../../components/sorting/sorting';
 import { createOfferLocations } from '../../helpers/create-offer-locations';
 import { Loader } from '../../components/loader/loader';
-import { useDispatch } from 'react-redux';
 import { fetchOffers } from '../../store/offers-data/fetch-offers';
 
 function MainPage(): JSX.Element {
@@ -17,7 +16,7 @@ function MainPage(): JSX.Element {
   const cards = useAppSelector(getSortedCards);
   const filter = useAppSelector(getFilterType);
   const isLoading = useAppSelector(getIsOffersLoading);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onMouseEnter = useCallback((id: string) => {
     setActiveCardId(id);

@@ -8,7 +8,7 @@ interface LoaderProps {
 export const Loader = ({ className = '' }: LoaderProps) => (
   <div className={'spinner-wrapper'}>
     <div className={'loader-spinner'}>
-      <div className={cn('lds-ellipsis', {}, [className])}>
+      <div className={cn('lds-ellipsis', [className])}>
         <div />
         <div />
         <div />
