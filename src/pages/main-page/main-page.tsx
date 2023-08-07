@@ -1,21 +1,23 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import cn from 'classnames';
 import PlaceCardList from '../../components/place-card-list/place-card-list';
 import Map from './../../components/map/map';
 import { useAppSelector } from '../../hooks';
-import { getCity, getFilterType, getSortedCards } from '../../store/offers-data/selectors';
+import { getCity, getFilterType, getIsOffersLoading, getSortedCards } from '../../store/offers-data/selectors';
 import CityList from '../../components/city-list/city-list';
 import Sorting from '../../components/sorting/sorting';
 import { createOfferLocations } from '../../helpers/create-offer-locations';
+import { Loader } from '../../components/loader/loader';
+import { useDispatch } from 'react-redux';
+import { fetchOffers } from '../../store/offers-data/fetch-offers';
 
 function MainPage(): JSX.Element {
   const [activeCardId, setActiveCardId] = useState('');
   const activeCity = useAppSelector(getCity);
   const cards = useAppSelector(getSortedCards);
   const filter = useAppSelector(getFilterType);
-  const isCards = cards.length !== 0;
-  const locationForMap = cards[0].city.location;
-  const offerLocations = createOfferLocations(cards);
+  const isLoading = useAppSelector(getIsOffersLoading);
+  const dispatch = useDispatch();
 
   const onMouseEnter = useCallback((id: string) => {
     setActiveCardId(id);
@@ -24,6 +26,22 @@ function MainPage(): JSX.Element {
   const onMouseLeave = useCallback(() => {
     setActiveCardId('');
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
+
+
+  if (isLoading) {
+    return (
+      <Loader />
+    );
+  }
+
+  const isCards = cards.length !== 0;
+  const locationForMap = cards[0].city.location;
+  const offerLocations = createOfferLocations(cards);
+
 
   const noPlacesFound = (
     <div className="cities__places-container container">

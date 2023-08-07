@@ -7,6 +7,7 @@ import { createSelector } from '@reduxjs/toolkit';
 export const getOffers = (state: State): PlaceCardType[] => state[NameSpace.Offers].offers;
 export const getCity = (state: State): string => state[NameSpace.Offers].city;
 export const getFilterType = (state: State): SortingOptions => state[NameSpace.Offers].filterType;
+export const getIsOffersLoading = (state: State): boolean => state[NameSpace.Offers].isLoading;
 export const getSortedCards = createSelector(
   getOffers,
   getFilterType,

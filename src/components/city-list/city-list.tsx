@@ -7,12 +7,12 @@ import { Cities } from '../../const';
 function CityList(): JSX.Element {
 
   const activeCity = useAppSelector(getCity);
-  const cities = Object.keys(Cities);
+  const cities = Object.values(Cities);
   const dispatch = useAppDispatch();
 
-  const handleCityClick = (cityName: Cities) => (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
+  const handleCityClick = (cityName: keyof typeof Cities) => (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
     evt.preventDefault();
-    dispatch(setCity(cityName));
+    dispatch(setCity(Cities[cityName]));
   };
 
   return (
@@ -20,14 +20,14 @@ function CityList(): JSX.Element {
       {Array.from(cities).map((city) => (
         <li key={city} className="locations__item">
           <a
-            onClick={handleCityClick(city)}
+            onClick={handleCityClick(Cities[city])}
             className={cn(
               'locations__item-link',
               'tabs__item',
               {'tabs__item--active': activeCity === city})}
             href="#"
           >
-            <span>{city}</span>
+            <span>{Cities[city]}</span>
           </a>
         </li>
       ))}
