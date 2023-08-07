@@ -5,6 +5,8 @@ import { offer } from './mocks/offer';
 import { reviews } from './mocks/rewiews';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ToastContainer />
       <App
         offer={offer}
         reviews={reviews}
