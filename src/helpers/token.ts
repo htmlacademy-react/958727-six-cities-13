@@ -1,4 +1,4 @@
-import { AUTH_TOKEN_KEY_NAME } from '../const';
+import { AUTH_TOKEN_KEY_NAME, LoginFormRegex } from '../const';
 import { Token } from '../types/token';
 
 
@@ -13,4 +13,19 @@ export const saveToken = (token: Token): void => {
 
 export const dropToken = (): void => {
   localStorage.removeItem(AUTH_TOKEN_KEY_NAME);
+};
+
+export const validatePassword = (value: string): boolean => {
+  if (!value) {
+    return false;
+  }
+
+  return !!value.match(LoginFormRegex.Password);
+};
+
+export const validateEmail = (value: string): boolean => {
+  if (!value) {
+    return false;
+  }
+  return !!value.match(LoginFormRegex.Email);
 };
