@@ -1,13 +1,17 @@
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Link } from 'react-router-dom';
 import Logo from '../shared/logo/logo';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
+import { fetchLogout } from '../../store/api-actions';
 
-type HeaderProps = {
-    authorizationStatus: AuthorizationStatus;
-  }
-
-function Header(props: HeaderProps): JSX.Element {
-  const {authorizationStatus} = props;
+function Header(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
+  const dispatch = useAppDispatch();
+  const handleSignOutClick = () => {
+    dispatch(fetchLogout());
+  };
   return (
     <header className="header">
       <div className="container">
@@ -24,17 +28,18 @@ function Header(props: HeaderProps): JSX.Element {
                       to={AppRoute.Favorites}
                       className="header__nav-link header__nav-link--profile"
                     >
-                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                      <div className="header__avatar-wrapper user__avatar-wrapper">
+                      </div>
                       <span className="header__user-name user__name">
-                        Oliver.conner@gmail.com
+                        {userData.email}
                       </span>
                       <span className="header__favorite-count">3</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">
-                    <Link to={AppRoute.Root} className="header__nav-link">
+                    <a onClick={handleSignOutClick} className="header__nav-link">
                       <span className="header__signout">Sign out</span>
-                    </Link>
+                    </a>
                   </li>
                 </>
                 :

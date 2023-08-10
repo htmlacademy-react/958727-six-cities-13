@@ -8,7 +8,7 @@ import CityList from '../../components/city-list/city-list';
 import Sorting from '../../components/sorting/sorting';
 import { createOfferLocations } from '../../helpers/create-offer-locations';
 import { Loader } from '../../components/loader/loader';
-import { fetchOffers } from '../../store/offers-data/fetch-offers';
+import { fetchOffers } from '../../store/api-actions';
 
 function MainPage(): JSX.Element {
   const [activeCardId, setActiveCardId] = useState('');

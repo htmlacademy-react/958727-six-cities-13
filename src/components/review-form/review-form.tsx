@@ -16,7 +16,7 @@ function ReviewForm(props: ReviewFormProps): JSX.Element | null {
   (textValue.length < ReviewLength.Min) ||
   (textValue.length > ReviewLength.Max);
 
-  const onRatingChange = (value: number): void => {
+  const handleRatingChange = (value: number): void => {
     setRatingValue(value);
   };
   const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
@@ -37,7 +37,7 @@ function ReviewForm(props: ReviewFormProps): JSX.Element | null {
           RatingTitles.map((item, index) => (
             <RatingInput
               key={item}
-              onChange={onRatingChange}
+              onChange={handleRatingChange}
               defaultValue={RatingTitles.length - index}
               id={`${RatingTitles.length - index}-stars`}
               title={item}

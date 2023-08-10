@@ -33,6 +33,7 @@ export enum SortingOptions {
 
 export enum NameSpace {
   Offers = 'OFFERS',
+  User = 'USER',
 }
 
 export enum Cities {
@@ -49,6 +50,11 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export const LoginFormRegex = {
+  Email: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
+  Password: /(?=.*?[0-9])(?=.*?[A-Za-z]).+/,
+} as const;
 
 export const URL_PIN_DEFAULT = 'src/assets/icons/pin.svg';
 export const URL_PIN_CURRENT = 'src/assets/icons/pin-active.svg';
