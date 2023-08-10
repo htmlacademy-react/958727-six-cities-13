@@ -43,7 +43,7 @@ export const fetchAuth = createAsyncThunk<void, undefined, ThunkConfig<string>
   },
 );
 
-export const fetchLogin = createAsyncThunk<void, AuthType, ThunkConfig<string>>(
+export const fetchLogin = createAsyncThunk<UserDataType, AuthType, ThunkConfig<string>>(
   'user/login',
   async ({login: email, password}, thunkApi) => {
     const { extra, rejectWithValue, dispatch } = thunkApi;
