@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NEARBY_PLACES_QUANTITY, NameSpace } from '../../const';
 import { shuffleArray } from '../../helpers/shuffle-array';
 import { PlaceCardType } from '../../types/place-card';
 import {State} from '../../types/state';
@@ -9,5 +9,5 @@ export const getNearbyOffersError = (state: State): string | undefined => state[
 export const getIsNearbyOffersLoading = (state: State): boolean => state[NameSpace.NearbyOffers].isLoading;
 export const getSortedNearbyOffers = createSelector(
   getNearbyOffers,
-  (offers) => shuffleArray<PlaceCardType>([...offers]).slice(0,3)
+  (offers) => shuffleArray<PlaceCardType>([...offers]).slice(0,NEARBY_PLACES_QUANTITY)
 );

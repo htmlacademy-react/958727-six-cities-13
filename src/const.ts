@@ -75,3 +75,5 @@ export const INITIAL_FILTER_TYPE = SortingOptions.Popular;
 export const BASE_URL = 'https://13.design.pages.academy/six-cities';
 export const REQUEST_TIMEOUT = 5000;
 export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+export const NEARBY_PLACES_QUANTITY = 3;
+export const REVIEWS_QUANTITY = 10;
