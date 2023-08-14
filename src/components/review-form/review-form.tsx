@@ -1,20 +1,26 @@
 import { AuthorizationStatus, RatingTitles, ReviewLength } from '../../const';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, FormEvent } from 'react';
 import RatingInput from '../rating-input/rating-input';
+import { PlaceCardType } from '../../types/place-card';
+import { fetchPostReview } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
 
 type ReviewFormProps = {
     authorizationStatus: string;
+    offerId: PlaceCardType['id'];
 }
 
 function ReviewForm(props: ReviewFormProps): JSX.Element | null {
 
-  const { authorizationStatus } = props;
+  const { offerId, authorizationStatus } = props;
   const [ratingValue, setRatingValue] = useState(0);
   const [textValue, setTextValue] = useState('');
 
   const isSubmitDisabled = !ratingValue ||
   (textValue.length < ReviewLength.Min) ||
   (textValue.length > ReviewLength.Max);
+
+  const dispatch = useAppDispatch();
 
   const handleRatingChange = (value: number): void => {
     setRatingValue(value);
@@ -23,12 +29,26 @@ function ReviewForm(props: ReviewFormProps): JSX.Element | null {
     setTextValue(evt.target.value);
   };
 
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const reviewData = {
+      comment: textValue,
+      rating: ratingValue,
+    };
+    dispatch(fetchPostReview({reviewData, id: offerId}));
+  };
+
   if (authorizationStatus !== AuthorizationStatus.Auth) {
     return null;
   }
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      onSubmit={handleSubmit}
+      className="reviews__form form"
+      action="#"
+      method="post"
+    >
       <label className="reviews__label form__label" htmlFor="review">
             Your review
       </label>

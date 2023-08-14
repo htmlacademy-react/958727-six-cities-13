@@ -14,4 +14,3 @@ export const getSortedCards = createSelector(
   getCity,
   (offers, filter, city) => sortCards([...offers], filter).filter((card) => card.city.name === city)
 );
-

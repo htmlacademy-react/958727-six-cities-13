@@ -37,9 +37,14 @@ function MainPage(): JSX.Element {
     );
   }
 
-  const isCards = cards.length !== 0;
-  const locationForMap = cards[0].city.location;
-  const offerLocations = createOfferLocations(cards);
+  let locationForMap, offerLocations;
+
+  const isCards = cards?.length !== 0;
+  if (isCards) {
+    locationForMap = cards[0].city.location;
+    offerLocations = createOfferLocations(cards);
+
+  }
 
 
   const noPlacesFound = (

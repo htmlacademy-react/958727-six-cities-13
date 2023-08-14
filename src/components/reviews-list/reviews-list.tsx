@@ -6,7 +6,9 @@ type ReviewsListProps = {
 }
 
 function ReviewsList(props: ReviewsListProps): JSX.Element {
-  const { reviews } = props;
+  const {reviews} = props;
+
+
   return (
     <ul className="reviews__list">
       {reviews.map((review) => (

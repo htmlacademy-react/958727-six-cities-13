@@ -6,4 +6,6 @@ export type ReviewType = {
     user: UserType;
     comment: string;
     rating: number;
-}
+};
+
+export type PostReviewType = Pick<ReviewType, 'comment' | 'rating'>

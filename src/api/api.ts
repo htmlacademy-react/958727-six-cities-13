@@ -1,8 +1,9 @@
-import { BASE_URL, REQUEST_TIMEOUT} from '../const';
+import { AppRoute, BASE_URL, REQUEST_TIMEOUT} from '../const';
 import axios, {AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
 import { getToken } from '../helpers/token';
 import {StatusCodes} from 'http-status-codes';
 import {toast} from 'react-toastify';
+import browserHistory from '../browser-history';
 
 type DetailMessageType = {
   type: string;
@@ -12,7 +13,6 @@ type DetailMessageType = {
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
 };
 
 const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
@@ -42,7 +42,9 @@ api.interceptors.response.use(
 
       toast.warn(detailMessage.message);
     }
-
+    if (error.response?.status === StatusCodes.NOT_FOUND) {
+      browserHistory.push(AppRoute.NotFound);
+    }
     throw error;
   }
 );

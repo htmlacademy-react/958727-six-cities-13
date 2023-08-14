@@ -3,6 +3,7 @@ export enum AppRoute {
   Favorites = '/favorites',
   Offer = '/offer/:id',
   Root = '/',
+  NotFound = '/not-found'
 }
 
 export enum AuthorizationStatus {
@@ -33,7 +34,10 @@ export enum SortingOptions {
 
 export enum NameSpace {
   Offers = 'OFFERS',
+  SingleOffer = 'SINGLE_OFFER',
   User = 'USER',
+  Reviews = 'REVIEWS',
+  NearbyOffers = 'NEARBY_OFFERS',
 }
 
 export enum Cities {
@@ -49,6 +53,8 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
+  Reviews = '/comments',
+  NearbyOffers = '/nearby',
 }
 
 export const LoginFormRegex = {

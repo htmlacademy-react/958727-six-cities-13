@@ -6,13 +6,16 @@ import { AuthType } from '../types/auth';
 import { dropToken, saveToken } from '../helpers/token';
 import { redirectToRoute } from './action';
 import { UserDataType } from '../types/user-data';
+import { OfferCardType } from '../types/offer-card';
+import { PostReviewType, ReviewType } from '../types/review';
+import { toast } from 'react-toastify';
 
 export const fetchOffers = createAsyncThunk<
     PlaceCardType[],
     undefined,
     ThunkConfig<string>
     >(
-      'articleDetailed/fetchArticleById',
+      'offers/fetchArticleById',
       async (_, thunkApi) => {
         const { extra, rejectWithValue } = thunkApi;
 
@@ -77,3 +80,101 @@ export const fetchLogout = createAsyncThunk<void, undefined, ThunkConfig<string>
     }
   },
 );
+
+export const fetchSingleOffer = createAsyncThunk<
+    OfferCardType,
+    PlaceCardType['id'],
+    ThunkConfig<string>
+    >(
+      'offer/fetchSingleOffer',
+      async (id, thunkApi) => {
+        const { extra, rejectWithValue } = thunkApi;
+
+        try {
+          const response = await extra.api.get<OfferCardType>(`${APIRoute.Offers}/${id}`);
+
+          if (!response.data) {
+            throw new Error();
+          }
+
+          return response.data;
+        } catch (e) {
+          return rejectWithValue('error');
+        }
+      },
+    );
+
+export const fetchReviews = createAsyncThunk<
+    ReviewType[],
+    PlaceCardType['id'],
+    ThunkConfig<string>
+    >(
+      'offer/fetchReviews',
+      async (id, thunkApi) => {
+        const { extra, rejectWithValue } = thunkApi;
+
+        try {
+          const response = await extra.api.get<ReviewType[]>(`${APIRoute.Reviews}/${id}`);
+
+          if (!response.data) {
+            throw new Error();
+          }
+
+          return response.data;
+        } catch (e) {
+          return rejectWithValue('error');
+        }
+      },
+    );
+
+export const fetchPostReview = createAsyncThunk<
+    ReviewType[],
+    {
+      reviewData: PostReviewType;
+      id: PlaceCardType['id'];
+    },
+    ThunkConfig<string>
+    >(
+      'offer/fetchPostReview',
+      async ({reviewData, id}, thunkApi) => {
+        const { extra, rejectWithValue } = thunkApi;
+
+        try {
+          const response = await extra.api.post<ReviewType[]>(
+            `${APIRoute.Reviews}/${id}`,
+            reviewData
+          );
+
+          if (!response.data) {
+            throw new Error();
+          }
+          toast.success('Your comment saved successfully!');
+          return response.data;
+        } catch (e) {
+          return rejectWithValue('error');
+        }
+      },
+    );
+
+export const fetchNearbyOffers = createAsyncThunk<
+    PlaceCardType[],
+    PlaceCardType['id'],
+    ThunkConfig<string>
+    >(
+      'offer/fetchNearbyOffers',
+      async (id, thunkApi) => {
+        const { extra, rejectWithValue } = thunkApi;
+
+        try {
+          const response = await extra.api.get<PlaceCardType[]>(`${APIRoute.Offers}/${id}/nearby`);
+
+          if (!response.data) {
+            throw new Error();
+          }
+
+          return response.data;
+        } catch (e) {
+          return rejectWithValue('error');
+        }
+      },
+    );

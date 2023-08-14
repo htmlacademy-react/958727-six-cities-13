@@ -8,7 +8,7 @@ const initialState: OffersDataType = {
   offers: [],
   city: INITIAL_CITY,
   filterType: INITIAL_FILTER_TYPE,
-  isLoading: true,
+  isLoading: false,
   error: undefined,
 
 };

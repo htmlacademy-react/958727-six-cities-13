@@ -1,7 +1,7 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {NameSpace, AuthorizationStatus} from '../../const';
 import {fetchAuth, fetchLogin, fetchLogout} from '../api-actions';
-import { UserProcess } from '../../types/state';
+import { UserProcessType } from '../../types/state';
 import { UserDataType } from '../../types/user-data';
 
 const initialUserData: UserDataType = {
@@ -11,7 +11,7 @@ const initialUserData: UserDataType = {
   avatarUrl: '',
 };
 
-const initialState: UserProcess = {
+const initialState: UserProcessType = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: initialUserData
 };
