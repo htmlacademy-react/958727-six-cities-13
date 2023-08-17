@@ -12,9 +12,11 @@ import { fetchNearbyOffers, fetchSingleOffer } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { getIsNearbyOffersLoading, getSortedNearbyOffers } from '../../store/nearby-offers-data/selectors';
 import Reviews from '../../components/reviews/reviews';
+import { PlaceCardType } from '../../types/place-card';
+import { createOfferLocations } from '../../helpers/create-offer-locations';
 
 function OfferPage(): JSX.Element | null {
-  const {id} = useParams();
+  const {id} = useParams() as {id: PlaceCardType['id']};
   const offer = useAppSelector(getSingleOffer);
   const isOffersLoading = useAppSelector(getIsSingleOfferLoading);
   const isNearbyLoading = useAppSelector(getIsNearbyOffersLoading);
@@ -22,10 +24,7 @@ function OfferPage(): JSX.Element | null {
   let locationForMap, offerLocations;
   if (cards?.length && offer) {
     locationForMap = offer.city.location;
-    offerLocations = cards?.map((card) => ({
-      id: card.id,
-      location: card.location
-    }));
+    offerLocations = createOfferLocations(cards);
     offerLocations.push({
       id: offer.id,
       location: offer.location
@@ -36,11 +35,8 @@ function OfferPage(): JSX.Element | null {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchSingleOffer(id));
-      dispatch(fetchNearbyOffers(id));
-    }
-
+    dispatch(fetchSingleOffer(id));
+    dispatch(fetchNearbyOffers(id));
     // return () => {
     //   singleOfferAbortController.abort();
     //   nearbyOffersAbortController.abort();
