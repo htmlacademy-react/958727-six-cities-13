@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { PlaceCardType } from '../types/place-card';
 import { ThunkConfig } from '../types/state';
-import { APIRoute, AppRoute } from '../const';
+import { APIRoute, AppRoute, nearbyOffersAbortController, reviewsAbortController, singleOfferAbortController } from '../const';
 import { AuthType } from '../types/auth';
 import { dropToken, saveToken } from '../helpers/token';
 import { redirectToRoute } from './action';
@@ -88,10 +88,12 @@ export const fetchSingleOffer = createAsyncThunk<
     >(
       'offer/fetchSingleOffer',
       async (id, thunkApi) => {
-        const { extra, rejectWithValue } = thunkApi;
+        const { extra, rejectWithValue, dispatch } = thunkApi;
 
         try {
-          const response = await extra.api.get<OfferCardType>(`${APIRoute.Offers}/${id}`);
+          const response = await extra.api.get<OfferCardType>(`${APIRoute.Offers}/${id}`, {
+            signal: singleOfferAbortController.signal,
+          });
 
           if (!response.data) {
             throw new Error();
@@ -99,6 +101,7 @@ export const fetchSingleOffer = createAsyncThunk<
 
           return response.data;
         } catch (e) {
+          dispatch(redirectToRoute(AppRoute.NotFound));
           return rejectWithValue('error');
         }
       },
@@ -114,7 +117,9 @@ export const fetchReviews = createAsyncThunk<
         const { extra, rejectWithValue } = thunkApi;
 
         try {
-          const response = await extra.api.get<ReviewType[]>(`${APIRoute.Reviews}/${id}`);
+          const response = await extra.api.get<ReviewType[]>(`${APIRoute.Reviews}/${id}`, {
+            signal: reviewsAbortController.signal,
+          });
 
           if (!response.data) {
             throw new Error();
@@ -166,7 +171,9 @@ export const fetchNearbyOffers = createAsyncThunk<
         const { extra, rejectWithValue } = thunkApi;
 
         try {
-          const response = await extra.api.get<PlaceCardType[]>(`${APIRoute.Offers}/${id}/nearby`);
+          const response = await extra.api.get<PlaceCardType[]>(`${APIRoute.Offers}/${id}/nearby`, {
+            signal: nearbyOffersAbortController.signal,
+          });
 
           if (!response.data) {
             throw new Error();

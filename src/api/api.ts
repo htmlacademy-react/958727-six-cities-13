@@ -42,9 +42,6 @@ api.interceptors.response.use(
 
       toast.warn(detailMessage.message);
     }
-    if (error.response?.status === StatusCodes.NOT_FOUND) {
-      browserHistory.push(AppRoute.NotFound);
-    }
     throw error;
   }
 );

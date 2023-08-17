@@ -1,6 +1,7 @@
+import { reviewsAbortController } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchReviews } from '../../store/api-actions';
-import { getReviews, getReviewsError, getSortedReviews } from '../../store/reviews-data/selectors';
+import { getIsReviewsLoading, getReviews, getSortedReviews } from '../../store/reviews-data/selectors';
 import { PlaceCardType } from '../../types/place-card';
 import { Loader } from '../loader/loader';
 import ReviewForm from '../review-form/review-form';
@@ -15,12 +16,16 @@ type ReviewsProps = {
 function Reviews({offerId}: ReviewsProps): JSX.Element {
   const reviews = useAppSelector(getReviews);
   const reviewsToShow = useAppSelector(getSortedReviews);
-  const isLoading = useAppSelector(getReviewsError);
+  const isLoading = useAppSelector(getIsReviewsLoading);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchReviews(offerId));
+
+    return () => {
+      reviewsAbortController.abort();
+    };
   }, [dispatch, offerId]);
 
   return (
