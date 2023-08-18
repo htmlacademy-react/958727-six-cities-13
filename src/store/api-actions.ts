@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { PlaceCardType } from '../types/place-card';
 import { ThunkConfig } from '../types/state';
-import { APIRoute, AppRoute, nearbyOffersAbortController, reviewsAbortController, singleOfferAbortController } from '../const';
+import { APIRoute, AppRoute } from '../const';
 import { AuthType } from '../types/auth';
 import { dropToken, saveToken } from '../helpers/token';
 import { redirectToRoute } from './action';
