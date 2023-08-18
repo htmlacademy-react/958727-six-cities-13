@@ -9,7 +9,7 @@ const initialState: OffersDataType = {
   city: INITIAL_CITY,
   filterType: INITIAL_FILTER_TYPE,
   isLoading: false,
-  error: undefined,
+  error: '',
 
 };
 
@@ -30,7 +30,7 @@ export const offersData = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchOffers.pending, (state) => {
-        state.error = undefined;
+        state.error = '';
         state.isLoading = true;
       })
       .addCase(fetchOffers.fulfilled, (state, action: PayloadAction<PlaceCardType[]>) => {

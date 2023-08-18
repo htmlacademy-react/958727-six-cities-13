@@ -7,7 +7,7 @@ import { fetchNearbyOffers } from '../api-actions';
 const initialState: NearbyOffersDataType = {
   nearbyOffers: [],
   isLoading: false,
-  error: undefined,
+  error: '',
 };
 
 export const nearbyOffersData = createSlice({
@@ -17,7 +17,7 @@ export const nearbyOffersData = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchNearbyOffers.pending, (state) => {
-        state.error = undefined;
+        state.error = '';
         state.isLoading = true;
       })
       .addCase(fetchNearbyOffers.fulfilled, (state, action: PayloadAction<PlaceCardType[]>) => {
