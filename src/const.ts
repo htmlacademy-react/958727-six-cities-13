@@ -77,6 +77,3 @@ export const REQUEST_TIMEOUT = 5000;
 export const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 export const NEARBY_PLACES_QUANTITY = 3;
 export const REVIEWS_QUANTITY = 10;
-export const singleOfferAbortController = new AbortController();
-export const reviewsAbortController = new AbortController();
-export const nearbyOffersAbortController = new AbortController();

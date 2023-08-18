@@ -1,4 +1,3 @@
-import { reviewsAbortController } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchReviews } from '../../store/api-actions';
 import { getIsReviewsLoading, getReviews, getSortedReviews } from '../../store/reviews-data/selectors';
@@ -21,10 +20,10 @@ function Reviews({offerId}: ReviewsProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchReviews(offerId));
+    const reviewsPromise = dispatch(fetchReviews(offerId));
 
     return () => {
-      reviewsAbortController.abort();
+      reviewsPromise.abort();
     };
   }, [dispatch, offerId]);
 

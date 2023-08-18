@@ -91,9 +91,7 @@ export const fetchSingleOffer = createAsyncThunk<
         const { extra, rejectWithValue, dispatch } = thunkApi;
 
         try {
-          const response = await extra.api.get<OfferCardType>(`${APIRoute.Offers}/${id}`, {
-            signal: singleOfferAbortController.signal,
-          });
+          const response = await extra.api.get<OfferCardType>(`${APIRoute.Offers}/${id}`);
 
           if (!response.data) {
             throw new Error();
@@ -117,9 +115,7 @@ export const fetchReviews = createAsyncThunk<
         const { extra, rejectWithValue } = thunkApi;
 
         try {
-          const response = await extra.api.get<ReviewType[]>(`${APIRoute.Reviews}/${id}`, {
-            signal: reviewsAbortController.signal,
-          });
+          const response = await extra.api.get<ReviewType[]>(`${APIRoute.Reviews}/${id}`);
 
           if (!response.data) {
             throw new Error();
@@ -171,9 +167,7 @@ export const fetchNearbyOffers = createAsyncThunk<
         const { extra, rejectWithValue } = thunkApi;
 
         try {
-          const response = await extra.api.get<PlaceCardType[]>(`${APIRoute.Offers}/${id}/nearby`, {
-            signal: nearbyOffersAbortController.signal,
-          });
+          const response = await extra.api.get<PlaceCardType[]>(`${APIRoute.Offers}/${id}/nearby`);
 
           if (!response.data) {
             throw new Error();

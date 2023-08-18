@@ -4,7 +4,7 @@ import { capitalize } from '../../helpers/capitalize';
 import PlaceCardList from './../../components/place-card-list/place-card-list';
 import cn from 'classnames';
 import Map from '../../components/map/map';
-import { RATING_AMPLIFIER, nearbyOffersAbortController, singleOfferAbortController } from '../../const';
+import { RATING_AMPLIFIER } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getIsSingleOfferLoading, getSingleOffer } from '../../store/single-offer-data/selectors';
 import { Loader } from '../../components/loader/loader';
@@ -35,12 +35,12 @@ function OfferPage(): JSX.Element | null {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchSingleOffer(id));
-    dispatch(fetchNearbyOffers(id));
-    // return () => {
-    //   singleOfferAbortController.abort();
-    //   nearbyOffersAbortController.abort();
-    // };
+    const singleOfferPromise = dispatch(fetchSingleOffer(id));
+    const nearbyOffersPromise = dispatch(fetchNearbyOffers(id));
+    return () => {
+      singleOfferPromise.abort();
+      nearbyOffersPromise.abort();
+    };
 
   }, [dispatch, id]);
 
