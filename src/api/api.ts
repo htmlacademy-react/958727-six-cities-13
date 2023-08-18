@@ -12,7 +12,6 @@ type DetailMessageType = {
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
 };
 
 const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
@@ -42,7 +41,6 @@ api.interceptors.response.use(
 
       toast.warn(detailMessage.message);
     }
-
     throw error;
   }
 );
