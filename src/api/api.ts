@@ -1,9 +1,8 @@
-import { AppRoute, BASE_URL, REQUEST_TIMEOUT} from '../const';
+import { BASE_URL, REQUEST_TIMEOUT} from '../const';
 import axios, {AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
 import { getToken } from '../helpers/token';
 import {StatusCodes} from 'http-status-codes';
 import {toast} from 'react-toastify';
-import browserHistory from '../browser-history';
 
 type DetailMessageType = {
   type: string;
