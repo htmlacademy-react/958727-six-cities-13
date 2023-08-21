@@ -1,5 +1,5 @@
 import { AuthorizationStatus, RatingTitles, ReviewLength } from '../../const';
-import { ChangeEvent, useState, FormEvent } from 'react';
+import { ChangeEvent, useState, FormEvent, useCallback } from 'react';
 import RatingInput from '../rating-input/rating-input';
 import { PlaceCardType } from '../../types/place-card';
 import { fetchPostReview } from '../../store/api-actions';
@@ -22,9 +22,9 @@ function ReviewForm(props: ReviewFormProps): JSX.Element | null {
 
   const dispatch = useAppDispatch();
 
-  const handleRatingChange = (value: number): void => {
+  const handleRatingChange = useCallback((value: number): void => {
     setRatingValue(value);
-  };
+  }, []);
   const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
     setTextValue(evt.target.value);
   };

@@ -5,16 +5,20 @@ interface LoaderProps {
     className?: string;
 }
 
-export const Loader = ({ className = '' }: LoaderProps) => (
-  <div className={'spinner-wrapper'}>
-    <div className={'loader-spinner'}>
-      <div className={cn('lds-ellipsis', [className])}>
-        <div />
-        <div />
-        <div />
-        <div />
+function Loader({ className = '' }: LoaderProps) {
+  return(
+    <div className={'spinner-wrapper'}>
+      <div className={'loader-spinner'}>
+        <div className={cn('lds-ellipsis', [className])}>
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
       </div>
     </div>
-  </div>
+  );
 
-);
+}
+
+export default Loader;

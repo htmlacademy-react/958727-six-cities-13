@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { MemoizedFooter } from '../../components/footer/memoized-footer';
-import { MemoizedPlaceCard } from '../../components/place-card/memoized-place-card';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getOffers } from '../../store/offers-data/selectors';
+import PlaceCard from '../../components/place-card/place-card';
+import Footer from '../../components/footer/footer';
 
 function FavoritesPage(): JSX.Element {
   const cards = useAppSelector(getOffers);
@@ -33,7 +33,7 @@ function FavoritesPage(): JSX.Element {
                     </div>
                     <div className="favorites__places">
                       {cards.map((card) => card.city.name === name && (
-                        <MemoizedPlaceCard
+                        <PlaceCard
                           key={card.id}
                           blockName='favorites'
                           cardData={card}
@@ -50,7 +50,7 @@ function FavoritesPage(): JSX.Element {
           </section>
         </div>
       </main>
-      <MemoizedFooter/>
+      <Footer/>
     </>
   );
 }

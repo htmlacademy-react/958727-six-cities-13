@@ -1,6 +1,6 @@
 
 import { PlaceCardType } from '../../types/place-card';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import cn from 'classnames';
 import { capitalize } from '../../helpers/capitalize';
 import { AppRoute, RATING_AMPLIFIER } from '../../const';
@@ -14,7 +14,7 @@ type PlaceCardProps = {
   onMouseLeave?: () => void;
 }
 
-function PlaceCard(props: PlaceCardProps): JSX.Element {
+const PlaceCard = memo((props: PlaceCardProps): JSX.Element => {
 
   const {
     blockName,
@@ -103,5 +103,8 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
       </div>
     </article>
   );
-}
+});
+
+PlaceCard.displayName = 'PlaceCard';
+
 export default PlaceCard;

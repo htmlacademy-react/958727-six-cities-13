@@ -1,15 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import cn from 'classnames';
 import { SortingOptions } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilterType } from '../../store/offers-data/offers-data';
+import { getFilterType } from '../../store/offers-data/selectors';
 
-type SortingProps = {
-  filter: SortingOptions;
-}
+const Sorting = memo((): JSX.Element => {
 
-function Sorting({filter}: SortingProps): JSX.Element {
-
+  const filter = useAppSelector(getFilterType);
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -70,6 +68,8 @@ function Sorting({filter}: SortingProps): JSX.Element {
       </ul>
     </form>
   );
-}
+});
+
+Sorting.displayName = 'Sorting';
 
 export default Sorting;

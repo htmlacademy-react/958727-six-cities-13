@@ -3,8 +3,6 @@ import { useCallback, useState } from 'react';
 import Sorting from '../sorting/sorting';
 import PlaceCardList from '../place-card-list/place-card-list';
 import cn from 'classnames';
-import { useAppSelector } from '../../hooks';
-import { getFilterType } from '../../store/offers-data/selectors';
 import Map from '../map/map';
 import { PlaceCardType } from '../../types/place-card';
 import { createOfferLocations } from '../../helpers/create-offer-locations';
@@ -17,7 +15,6 @@ type OffersContainerProps = {
 export const OffersContainer = (props: OffersContainerProps) => {
   const {activeCity, cards} = props;
   const [activeCardId, setActiveCardId] = useState('');
-  const filter = useAppSelector(getFilterType);
   const locationForMap = cards[0].city.location;
   const offerLocations = createOfferLocations(cards);
 
@@ -34,7 +31,7 @@ export const OffersContainer = (props: OffersContainerProps) => {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{cards.length} places to stay in {activeCity}</b>
-        <Sorting filter={filter}/>
+        <Sorting/>
         <PlaceCardList
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}

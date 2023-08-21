@@ -1,36 +1,23 @@
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchReviews } from '../../store/api-actions';
-import { getIsReviewsLoading, getReviews, getSortedReviews } from '../../store/reviews-data/selectors';
-import { PlaceCardType } from '../../types/place-card';
-import { Loader } from '../loader/loader';
+import { useAppSelector } from '../../hooks';
+import { getSortedReviews } from '../../store/reviews-data/selectors';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
 import { getAuthorizationStatus } from './../../store/user-process/selectors';
-import { useEffect } from 'react';
+import { ReviewType } from '../../types/review';
+import { PlaceCardType } from '../../types/place-card';
 
 type ReviewsProps = {
+    reviews: ReviewType[];
     offerId: PlaceCardType['id'];
 }
 
-function Reviews({offerId}: ReviewsProps): JSX.Element {
-  const reviews = useAppSelector(getReviews);
+function Reviews({reviews, offerId}: ReviewsProps): JSX.Element {
   const reviewsToShow = useAppSelector(getSortedReviews);
-  const isLoading = useAppSelector(getIsReviewsLoading);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const reviewsPromise = dispatch(fetchReviews(offerId));
-
-    return () => {
-      reviewsPromise.abort();
-    };
-  }, [dispatch, offerId]);
 
   return (
     <>
-      {isLoading && <Loader/>}
-      {(!isLoading && !!reviews?.length) && (
+      {!!reviews?.length && (
         <section className="offer__reviews reviews">
           <h2 className="reviews__title">
         Reviews · <span className="reviews__amount">{reviews.length}</span>
@@ -44,4 +31,3 @@ function Reviews({offerId}: ReviewsProps): JSX.Element {
 }
 
 export default Reviews;
-

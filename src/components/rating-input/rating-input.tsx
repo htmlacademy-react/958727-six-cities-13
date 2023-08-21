@@ -5,7 +5,7 @@ type RatingInputProps = {
     title: string;
 }
 
-function RatingInput(props: RatingInputProps): JSX.Element {
+function RatingInput (props: RatingInputProps): JSX.Element {
   const {
     onChange,
     defaultValue,

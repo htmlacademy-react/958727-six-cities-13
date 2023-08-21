@@ -1,5 +1,5 @@
-import { MemoizedPlaceCard } from '../place-card/memoized-place-card';
 import { PlaceCardType } from '../../types/place-card';
+import PlaceCard from '../place-card/place-card';
 
 type PlaceCardListProps = {
     className?: string;
@@ -9,7 +9,7 @@ type PlaceCardListProps = {
     onMouseLeave?: () => void;
   }
 
-function PlaceCardList(props: PlaceCardListProps): JSX.Element {
+function PlaceCardList (props: PlaceCardListProps): JSX.Element {
   const {
     cardBlockName,
     className = '',
@@ -22,7 +22,7 @@ function PlaceCardList(props: PlaceCardListProps): JSX.Element {
     <div className={className}>
       {
         cards.map((card: PlaceCardType) => (
-          <MemoizedPlaceCard
+          <PlaceCard
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
             isPremium={card.isPremium}
