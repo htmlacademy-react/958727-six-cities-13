@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { fetchLogin } from '../../store/api-actions';
 import { validateEmail, validatePassword } from '../../helpers/token';
+import LoginFormField from './login-form-field';
 
 function LoginForm(): JSX.Element | null {
   const [emailValue, setEmailValue] = useState('');
@@ -10,12 +11,12 @@ function LoginForm(): JSX.Element | null {
   const isSubmitDisabled = !validateEmail(emailValue) || !validatePassword(passwordValue);
   const dispatch = useAppDispatch();
 
-  const handleEmailChange = (evt: ChangeEvent<HTMLInputElement>): void => {
+  const handleEmailChange = useCallback((evt: ChangeEvent<HTMLInputElement>): void => {
     setEmailValue(evt.target.value);
-  };
-  const handlePasswordChange = (evt: ChangeEvent<HTMLInputElement>): void => {
+  }, []);
+  const handlePasswordChange = useCallback((evt: ChangeEvent<HTMLInputElement>): void => {
     setPasswordValue(evt.target.value.replaceAll(' ', ''));
-  };
+  }, []);
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -24,30 +25,8 @@ function LoginForm(): JSX.Element | null {
 
   return (
     <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
-      <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">E-mail</label>
-        <input
-          onChange={handleEmailChange}
-          value={emailValue}
-          className="login__input form__input"
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-        />
-      </div>
-      <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">Password</label>
-        <input
-          onChange={handlePasswordChange}
-          value={passwordValue}
-          className="login__input form__input"
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
-      </div>
+      <LoginFormField onChange={handleEmailChange} value={emailValue} name='email'/>
+      <LoginFormField onChange={handlePasswordChange} value={passwordValue} name='password'/>
       <button
         className="login__submit form__submit button"
         type="submit"

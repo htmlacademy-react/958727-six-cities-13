@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type RatingInputProps = {
     onChange: (value: number) => void;
     defaultValue: number;
@@ -5,7 +7,7 @@ type RatingInputProps = {
     title: string;
 }
 
-function RatingInput(props: RatingInputProps): JSX.Element {
+const RatingInput = memo((props: RatingInputProps): JSX.Element => {
   const {
     onChange,
     defaultValue,
@@ -37,6 +39,8 @@ function RatingInput(props: RatingInputProps): JSX.Element {
       </label>
     </>
   );
-}
+});
+
+RatingInput.displayName = 'RatingInput';
 
 export default RatingInput;

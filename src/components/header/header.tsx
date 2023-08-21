@@ -4,8 +4,9 @@ import Logo from '../shared/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 import { fetchLogout } from '../../store/api-actions';
+import { memo } from 'react';
 
-function Header(): JSX.Element {
+const Header = memo((): JSX.Element => {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
@@ -56,6 +57,8 @@ function Header(): JSX.Element {
       </div>
     </header>
   );
-}
+});
+
+Header.displayName = 'Header';
 
 export default Header;

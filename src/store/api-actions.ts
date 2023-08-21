@@ -33,13 +33,14 @@ export const fetchOffers = createAsyncThunk<
       },
     );
 
-export const fetchAuth = createAsyncThunk<void, undefined, ThunkConfig<string>
+export const fetchAuth = createAsyncThunk<UserDataType, undefined, ThunkConfig<string>
 >(
   'user/checkAuth',
   async (_, thunkApi) => {
     const { extra, rejectWithValue } = thunkApi;
     try {
-      await extra.api.get(APIRoute.Login);
+      const {data} = await extra.api.get<UserDataType>(APIRoute.Login);
+      return data;
     }catch (e) {
       return rejectWithValue('error');
     }

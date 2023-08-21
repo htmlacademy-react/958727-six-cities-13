@@ -3,8 +3,9 @@ import { setCity } from '../../store/offers-data/offers-data';
 import { getCity } from '../../store/offers-data/selectors';
 import cn from 'classnames';
 import { Cities } from '../../const';
+import { memo } from 'react';
 
-function CityList(): JSX.Element {
+const CityList = memo((): JSX.Element => {
 
   const activeCity = useAppSelector(getCity);
   const cities = Object.values(Cities);
@@ -33,6 +34,8 @@ function CityList(): JSX.Element {
       ))}
     </ul>
   );
-}
+});
+
+CityList.displayName = 'CityList';
 
 export default CityList;
