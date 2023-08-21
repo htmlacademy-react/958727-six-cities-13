@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../../const';
-import { memo } from 'react';
 
 type LogoProps = {
   width: number;
@@ -8,7 +7,7 @@ type LogoProps = {
   blockName: string;
 }
 
-const Logo = memo((props: LogoProps): JSX.Element => {
+function Logo(props: LogoProps): JSX.Element {
   const { width, height, blockName } = props;
   return (
     <NavLink
@@ -27,9 +26,7 @@ const Logo = memo((props: LogoProps): JSX.Element => {
       />
     </NavLink>
   );
-});
-
-Logo.displayName = 'Logo';
+}
 
 export default Logo;
 

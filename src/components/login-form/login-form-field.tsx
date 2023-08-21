@@ -27,6 +27,4 @@ const LoginFormField = (props: LoginFormFieldProps): JSX.Element | null => {
   );
 };
 
-LoginFormField.displayName = 'LoginFormField';
-
 export default LoginFormField;

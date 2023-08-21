@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { PlaceCardType } from '../../types/place-card';
 import PlaceCard from '../place-card/place-card';
 
@@ -10,7 +9,7 @@ type PlaceCardListProps = {
     onMouseLeave?: () => void;
   }
 
-const PlaceCardList = memo((props: PlaceCardListProps): JSX.Element => {
+function PlaceCardList (props: PlaceCardListProps): JSX.Element {
   const {
     cardBlockName,
     className = '',
@@ -35,8 +34,6 @@ const PlaceCardList = memo((props: PlaceCardListProps): JSX.Element => {
       }
     </div>
   );
-});
-
-PlaceCardList.displayName = 'PlaceCardList';
+}
 
 export default PlaceCardList;
