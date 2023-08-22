@@ -32,6 +32,12 @@ export type NearbyOffersDataType = {
     error?: string;
 }
 
+export type FavoriteOffersDataType = {
+    favoriteOffers: PlaceCardType[];
+    isLoading: boolean;
+    error?: string;
+}
+
 export type UserProcessType = {
     authorizationStatus: AuthorizationStatus;
     userData: UserDataType;

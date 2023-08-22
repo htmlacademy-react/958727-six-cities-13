@@ -9,6 +9,7 @@ import { UserDataType } from '../types/user-data';
 import { OfferCardType } from '../types/offer-card';
 import { PostReviewType, ReviewType } from '../types/review';
 import { toast } from 'react-toastify';
+import { manageResponseError } from './helpers/manage-response-error';
 
 export const fetchOffers = createAsyncThunk<
     PlaceCardType[],
@@ -27,8 +28,8 @@ export const fetchOffers = createAsyncThunk<
           }
 
           return response.data;
-        } catch (e) {
-          return rejectWithValue('error');
+        } catch (error) {
+          return rejectWithValue(manageResponseError(error));
         }
       },
     );
@@ -41,8 +42,8 @@ export const fetchAuth = createAsyncThunk<UserDataType, undefined, ThunkConfig<s
     try {
       const {data} = await extra.api.get<UserDataType>(APIRoute.Login);
       return data;
-    }catch (e) {
-      return rejectWithValue('error');
+    } catch (error) {
+      return rejectWithValue(manageResponseError(error));
     }
   },
 );
@@ -63,8 +64,8 @@ export const fetchLogin = createAsyncThunk<UserDataType, AuthType, ThunkConfig<s
       dispatch(redirectToRoute(AppRoute.Root));
 
       return restData;
-    } catch(e) {
-      return rejectWithValue('error');
+    } catch (error) {
+      return rejectWithValue(manageResponseError(error));
     }
   },
 );
@@ -76,8 +77,8 @@ export const fetchLogout = createAsyncThunk<void, undefined, ThunkConfig<string>
     try {
       await extra.api.delete(APIRoute.Logout);
       dropToken();
-    } catch(e) {
-      return rejectWithValue('error');
+    } catch (error) {
+      return rejectWithValue(manageResponseError(error));
     }
   },
 );
@@ -99,9 +100,9 @@ export const fetchSingleOffer = createAsyncThunk<
           }
 
           return response.data;
-        } catch (e) {
+        } catch (error) {
           dispatch(redirectToRoute(AppRoute.NotFound));
-          return rejectWithValue('error');
+          return rejectWithValue(manageResponseError(error));
         }
       },
     );
@@ -123,8 +124,8 @@ export const fetchReviews = createAsyncThunk<
           }
 
           return response.data;
-        } catch (e) {
-          return rejectWithValue('error');
+        } catch (error) {
+          return rejectWithValue(manageResponseError(error));
         }
       },
     );
@@ -152,8 +153,8 @@ export const fetchPostReview = createAsyncThunk<
           }
           toast.success('Your comment saved successfully!');
           return response.data;
-        } catch (e) {
-          return rejectWithValue('error');
+        } catch (error) {
+          return rejectWithValue(manageResponseError(error));
         }
       },
     );
@@ -175,8 +176,31 @@ export const fetchNearbyOffers = createAsyncThunk<
           }
 
           return response.data;
-        } catch (e) {
-          return rejectWithValue('error');
+        } catch (error) {
+          return rejectWithValue(manageResponseError(error));
+        }
+      },
+    );
+
+export const fetchFavoriteOffers = createAsyncThunk<
+    PlaceCardType[],
+    undefined,
+    ThunkConfig<string>
+    >(
+      'offer/fetchFavoriteOffers',
+      async (_, thunkApi) => {
+        const { extra, rejectWithValue } = thunkApi;
+
+        try {
+          const response = await extra.api.get<PlaceCardType[]>(APIRoute.Favorite);
+
+          if (!response.data) {
+            throw new Error();
+          }
+
+          return response.data;
+        } catch (error) {
+          return rejectWithValue(manageResponseError(error));
         }
       },
     );
