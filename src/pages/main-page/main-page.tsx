@@ -5,6 +5,7 @@ import CityList from '../../components/city-list/city-list';
 import Loader from '../../components/loader/loader';
 import { fetchOffers } from '../../store/api-actions';
 import { OffersContainer } from '../../components/offers-container/offers-container';
+import MainEmpty from '../../components/main-empty/main-empty';
 
 function MainPage(): JSX.Element {
   const activeCity = useAppSelector(getCity);
@@ -16,27 +17,13 @@ function MainPage(): JSX.Element {
     dispatch(fetchOffers());
   }, [dispatch]);
 
-
   if (isLoading) {
     return (
       <Loader />
     );
   }
 
-
   const isCards = cards?.length !== 0;
-
-  const noPlacesFound = (
-    <div className="cities__places-container container">
-      <section className="cities__places places">
-        <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">
-          {cards.length} places to stay in {activeCity}
-        </b>
-      </section>
-    </div>
-  );
-
 
   return (
     <main className="page__main page__main--index">
@@ -47,7 +34,7 @@ function MainPage(): JSX.Element {
         </section>
       </div>
       <div className="cities">
-        {isCards ? <OffersContainer activeCity={activeCity} cards={cards}/> : noPlacesFound}
+        {isCards ? <OffersContainer activeCity={activeCity} cards={cards}/> : <MainEmpty/>}
       </div>
     </main>
 
