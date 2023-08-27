@@ -19,7 +19,7 @@ function FavoritesPage(): JSX.Element {
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           {
-            !!cards && cards.length !== 0 ?
+            cards?.length !== 0 ?
               <Favorites cards={cards}/> :
               <FavoritesEmpty/>
           }

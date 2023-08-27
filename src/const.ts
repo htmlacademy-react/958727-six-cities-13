@@ -41,6 +41,7 @@ export enum NameSpace {
   Reviews = 'REVIEWS',
   NearbyOffers = 'NEARBY_OFFERS',
   FavoriteOffers = 'FAVORITE_OFFERS',
+  FavoriteSingleOffer = 'FAVORITE_SINGLE_OFFER',
 }
 
 export enum Cities {

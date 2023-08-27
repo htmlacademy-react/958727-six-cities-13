@@ -38,6 +38,12 @@ export type FavoriteOffersDataType = {
     error?: string;
 }
 
+export type FavoriteSingleOfferDataType = {
+    favoriteSingleOffer: OfferCardType | null;
+    isLoading: boolean;
+    error?: string;
+}
+
 export type UserProcessType = {
     authorizationStatus: AuthorizationStatus;
     userData: UserDataType;

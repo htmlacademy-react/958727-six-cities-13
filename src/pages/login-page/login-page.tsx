@@ -1,12 +1,9 @@
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus, Cities } from '../../const';
 import LoginForm from '../../components/login-form/login-form';
 import { getRandomElementFromArray } from '../../helpers/get-random-array-element';
 import { useAppDispatch } from '../../hooks';
-import { MouseEvent } from 'react';
 import { setCity } from '../../store/offers-data/offers-data';
-import browserHistory from '../../browser-history';
-import './login-page-module.scss';
 
 type LoginPageProps = {
   authorizationStatus: AuthorizationStatus;
@@ -17,10 +14,9 @@ function LoginPage(props: LoginPageProps): JSX.Element {
   const citiesKeys = Object.values(Cities);
   const randomCity = getRandomElementFromArray<keyof typeof Cities>(citiesKeys);
   const dispatch = useAppDispatch();
-  const handleCityClick = (evt: MouseEvent<HTMLButtonElement>) => {
-    evt.preventDefault();
+
+  const handleCityClick = () => {
     dispatch(setCity(Cities[randomCity]));
-    browserHistory.push(AppRoute.Root);
   };
 
   return (
@@ -33,9 +29,9 @@ function LoginPage(props: LoginPageProps): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <button type="button" className="locations__item-link" onClick={handleCityClick} >
+              <Link to={AppRoute.Root} className="locations__item-link" onClick={handleCityClick} >
                 <span>{randomCity}</span>
-              </button>
+              </Link>
             </div>
           </section>
         </div>

@@ -10,6 +10,9 @@ import { OfferCardType } from '../types/offer-card';
 import { PostReviewType, ReviewType } from '../types/review';
 import { toast } from 'react-toastify';
 import { manageResponseError } from './helpers/manage-response-error';
+import { getOffers } from './offers-data/selectors';
+import { setSingleOffer } from './single-offer-data/single-offer-data';
+import { setOffers } from './offers-data/offers-data';
 
 export const fetchOffers = createAsyncThunk<
     PlaceCardType[],
@@ -204,3 +207,36 @@ export const fetchFavoriteOffers = createAsyncThunk<
         }
       },
     );
+
+export const fetchFavorite = createAsyncThunk<
+OfferCardType,
+{
+  favoriteStatus: 0 | 1;
+  offerId: PlaceCardType['id'];
+},
+ThunkConfig<string>
+>(
+  'offer/fetchFavorite',
+  async ({favoriteStatus, offerId}, thunkApi) => {
+    const { extra, rejectWithValue, getState, dispatch } = thunkApi;
+    const offers = getOffers(getState());
+
+    try {
+      const response = await extra.api.post<OfferCardType>(`${APIRoute.Favorite}/${offerId}/${favoriteStatus}`);
+
+      if (!response.data) {
+        throw new Error();
+      }
+
+      const newOffers = offers.map((offer) => offer.id === offerId ? {...offer, isFavorite: !!favoriteStatus} : offer);
+
+      dispatch(setSingleOffer(response.data));
+      dispatch(setOffers(newOffers));
+      dispatch(fetchFavoriteOffers());
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(manageResponseError(error));
+    }
+  },
+);

@@ -1,35 +1,42 @@
 import { Link } from 'react-router-dom';
 import { PlaceCardType } from '../../types/place-card';
 import PlaceCard from '../place-card/place-card';
-import { AppRoute } from '../../const';
+import { AppRoute, Cities } from '../../const';
 
 type FavoritesProps = {
     cards: PlaceCardType[];
 }
 
+type citiesOffers = {
+  [key in Cities]?: PlaceCardType[];
+}
+
 function Favorites({cards}: FavoritesProps): JSX.Element {
-  const cardNames = cards?.reduce((acc: string[], cur) => {
-    if (!acc.includes(cur.city.name)) {
-      acc.push(cur.city.name);
+  const cardNames = cards?.reduce((acc: citiesOffers, currentCard) => {
+    const cityName = currentCard.city.name;
+    if (cityName in acc) {
+      acc[cityName]?.push(currentCard);
+    } else {
+      acc[cityName] = [currentCard];
     }
     return acc;
-  }, []);
+  }, {});
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {
-          cardNames.map((name) => (
-            <li key={name} className="favorites__locations-items">
+          Object.entries(cardNames).map(([cityKey, cityValue]) => (
+            <li key={cityKey} className="favorites__locations-items">
               <div className="favorites__locations locations locations--current">
                 <div className="locations__item">
                   <Link className="locations__item-link" to={AppRoute.Root}>
-                    <span>{name}</span>
+                    <span>{cityKey}</span>
                   </Link>
                 </div>
               </div>
               <div className="favorites__places">
-                {cards.map((card) => card.city.name === name && (
+                {cityValue.map((card) => (
                   <PlaceCard
                     key={card.id}
                     blockName='favorites'

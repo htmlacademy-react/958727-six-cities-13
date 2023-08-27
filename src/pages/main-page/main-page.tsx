@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCity, getIsOffersLoading, getSortedCards } from '../../store/offers-data/selectors';
 import CityList from '../../components/city-list/city-list';
 import Loader from '../../components/loader/loader';
-import { fetchOffers } from '../../store/api-actions';
+import { fetchFavoriteOffers, fetchOffers } from '../../store/api-actions';
 import { OffersContainer } from '../../components/offers-container/offers-container';
 import MainEmpty from '../../components/main-empty/main-empty';
 
@@ -15,6 +15,7 @@ function MainPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffers());
+    dispatch(fetchFavoriteOffers());
   }, [dispatch]);
 
   if (isLoading) {
