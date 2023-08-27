@@ -1,10 +1,10 @@
 
 import { PlaceCardType } from '../../types/place-card';
-import { memo, useState } from 'react';
-import cn from 'classnames';
+import { memo } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 import { AppRoute, RATING_AMPLIFIER } from '../../const';
 import { Link, generatePath } from 'react-router-dom';
+import FavoritesButton from '../shared/favorites-button/favorites-button';
 
 type PlaceCardProps = {
   blockName?: string;
@@ -37,10 +37,6 @@ const PlaceCard = memo((props: PlaceCardProps): JSX.Element => {
     onMouseEnter?.(id);
   };
 
-  const [ marked, setIsMarked ] = useState(isFavorite);
-
-  const handleMarkButtonClick = () => setIsMarked(!marked);
-
   return (
     <article
       onMouseEnter={handleMouseEnter}
@@ -69,24 +65,13 @@ const PlaceCard = memo((props: PlaceCardProps): JSX.Element => {
             <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button
-            onClick={handleMarkButtonClick}
-            className={cn(
-              'place-card__bookmark-button',
-              'button',
-              {'place-card__bookmark-button--active' : marked}
-            )}
-            type="button"
-          >
-            <svg
-              className="place-card__bookmark-icon"
-              width={18}
-              height={19}
-            >
-              <use xlinkHref="#icon-bookmark" />
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <FavoritesButton
+            offerId={id}
+            iconWidth={18}
+            iconHeight={19}
+            blockName='place-card'
+            isFavorite={isFavorite}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

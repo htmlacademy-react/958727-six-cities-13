@@ -13,7 +13,11 @@ const initialState: SingleOfferDataType = {
 export const singleOfferData = createSlice({
   name: NameSpace.SingleOffer,
   initialState,
-  reducers: {},
+  reducers: {
+    setSingleOffer: (state, action: PayloadAction<OfferCardType>) => {
+      state.singleOffer = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSingleOffer.fulfilled, (state, action: PayloadAction<OfferCardType>) => {
@@ -30,3 +34,5 @@ export const singleOfferData = createSlice({
       });
   }
 });
+
+export const {setSingleOffer} = singleOfferData.actions;
