@@ -16,7 +16,7 @@ store.dispatch(fetchAuth());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer limit={1}/>
+      <ToastContainer limit={1} position='bottom-left'/>
       <App/>
     </Provider>
   </React.StrictMode>

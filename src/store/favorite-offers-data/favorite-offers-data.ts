@@ -5,7 +5,7 @@ import { PlaceCardType } from '../../types/place-card';
 import { fetchFavoriteOffers } from '../api-actions';
 
 const initialState: FavoriteOffersDataType = {
-  favoriteOffers: [],
+  favoriteOffers: null,
   isLoading: false,
   error: '',
 };
@@ -13,7 +13,11 @@ const initialState: FavoriteOffersDataType = {
 export const favoriteOffersData = createSlice({
   name: NameSpace.FavoriteOffers,
   initialState,
-  reducers: {},
+  reducers: {
+    updateFavorites: (state, action: PayloadAction<PlaceCardType[]>) => {
+      state.favoriteOffers = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFavoriteOffers.pending, (state) => {
@@ -30,3 +34,5 @@ export const favoriteOffersData = createSlice({
       });
   },
 });
+
+export const {updateFavorites} = favoriteOffersData.actions;
