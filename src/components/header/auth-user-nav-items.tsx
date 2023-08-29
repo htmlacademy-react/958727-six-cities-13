@@ -2,16 +2,20 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchLogout } from '../../store/api-actions';
-import { getFavoriteOffers } from '../../store/favorite-offers-data/selectors';
 import { getUserData } from '../../store/user-process/selectors';
 
-function AuthUserNavItems(): JSX.Element {
+type AuthUserNavItemsProps = {
+  favoritesCount: number;
+}
+
+function AuthUserNavItems({favoritesCount}: AuthUserNavItemsProps): JSX.Element {
   const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
+
   const handleSignOutClick = () => {
     dispatch(fetchLogout());
   };
-  const favorites = useAppSelector(getFavoriteOffers);
+
   return (
     <>
       <li className="header__nav-item user">
@@ -24,7 +28,7 @@ function AuthUserNavItems(): JSX.Element {
           <span className="header__user-name user__name">
             {userData.email}
           </span>
-          <span className="header__favorite-count">{favorites.length}</span>
+          <span className="header__favorite-count">{favoritesCount}</span>
         </Link>
       </li>
       <li className="header__nav-item">

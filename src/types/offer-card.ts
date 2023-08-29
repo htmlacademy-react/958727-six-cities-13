@@ -8,4 +8,5 @@ export type OfferCardType = Omit<PlaceCardType, 'previewImage'> & {
     host: HostType;
     images: string[];
     maxAdults: number;
+    previewImage?: string;
 }

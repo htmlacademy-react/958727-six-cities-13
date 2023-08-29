@@ -30,7 +30,7 @@ export const OffersContainer = (props: OffersContainerProps) => {
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{cards.length} places to stay in {activeCity}</b>
+        <b className="places__found">{cards.length} {`${cards.length === 1 ? 'place' : 'places'}`} to stay in {activeCity}</b>
         <Sorting/>
         <PlaceCardList
           onMouseEnter={onMouseEnter}

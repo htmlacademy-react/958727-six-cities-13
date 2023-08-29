@@ -3,9 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getCity, getIsOffersLoading, getSortedCards } from '../../store/offers-data/selectors';
 import CityList from '../../components/city-list/city-list';
 import Loader from '../../components/loader/loader';
-import { fetchFavoriteOffers, fetchOffers } from '../../store/api-actions';
+import { fetchOffers } from '../../store/api-actions';
 import { OffersContainer } from '../../components/offers-container/offers-container';
 import MainEmpty from '../../components/main-empty/main-empty';
+import Layout from '../../components/layout/layout';
+import cn from 'classnames';
 
 function MainPage(): JSX.Element {
   const activeCity = useAppSelector(getCity);
@@ -15,7 +17,6 @@ function MainPage(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffers());
-    dispatch(fetchFavoriteOffers());
   }, [dispatch]);
 
   if (isLoading) {
@@ -27,17 +28,24 @@ function MainPage(): JSX.Element {
   const isCards = cards?.length !== 0;
 
   return (
-    <main className="page__main page__main--index">
-      <h1 className="visually-hidden">Cities</h1>
-      <div className="tabs">
-        <section className="locations container">
-          <CityList />
-        </section>
-      </div>
-      <div className="cities">
-        {isCards ? <OffersContainer activeCity={activeCity} cards={cards}/> : <MainEmpty/>}
-      </div>
-    </main>
+    <Layout className='page--gray page--main'>
+      <main
+        className={cn(
+          'page__main',
+          'page__main--index',
+          {'page__main--index-empty' : !isCards})}
+      >
+        <h1 className="visually-hidden">Cities</h1>
+        <div className="tabs">
+          <section className="locations container">
+            <CityList />
+          </section>
+        </div>
+        <div className="cities">
+          {isCards ? <OffersContainer activeCity={activeCity} cards={cards}/> : <MainEmpty activeCity={activeCity}/>}
+        </div>
+      </main>
+    </Layout>
 
   );
 }

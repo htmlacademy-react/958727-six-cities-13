@@ -1,12 +1,23 @@
 import { AppRoute, AuthorizationStatus } from '../../const';
+import {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../shared/logo/logo';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import AuthUserNavItems from './auth-user-nav-items';
+import { fetchFavoriteOffers } from '../../store/api-actions';
+import { getFavoriteOffers } from '../../store/favorite-offers-data/selectors';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const dispatch = useAppDispatch();
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth && !favoriteOffers) {
+      dispatch(fetchFavoriteOffers());
+    }
+  }, [authorizationStatus, dispatch, favoriteOffers]);
 
   return (
     <header className="header">
@@ -18,7 +29,7 @@ function Header(): JSX.Element {
           <nav className="header__nav">
             <ul className="header__nav-list">
               {authorizationStatus === AuthorizationStatus.Auth ?
-                <AuthUserNavItems />
+                <AuthUserNavItems favoritesCount={favoriteOffers?.length | 0} />
                 :
                 <li className="header__nav-item">
                   <Link to={AppRoute.Login} className="header__nav-link header__nav-link--profile">

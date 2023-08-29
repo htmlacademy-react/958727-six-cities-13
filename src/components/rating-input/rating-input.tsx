@@ -1,30 +1,35 @@
+import { ChangeEvent } from 'react';
+
 type RatingInputProps = {
-    onChange: (value: number) => void;
-    defaultValue: number;
+    onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+    value: number;
     id: string;
     title: string;
+    isChecked: boolean;
+    disabled: boolean;
 }
 
 function RatingInput (props: RatingInputProps): JSX.Element {
   const {
     onChange,
-    defaultValue,
+    value,
     id ,
-    title
+    title,
+    isChecked,
+    disabled = false,
   } = props;
-
-  const handleInputChange = () => onChange(defaultValue);
-
 
   return (
     <>
       <input
-        onChange={handleInputChange}
+        onChange={onChange}
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={defaultValue}
+        checked={isChecked}
+        value={value}
         id={id}
         type="radio"
+        disabled={disabled}
       />
       <label
         htmlFor={id}
