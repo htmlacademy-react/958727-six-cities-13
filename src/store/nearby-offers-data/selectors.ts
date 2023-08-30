@@ -5,7 +5,6 @@ import { PlaceCardType } from '../../types/place-card';
 import {State} from '../../types/state';
 
 export const getNearbyOffers = (state: State): PlaceCardType[] => state[NameSpace.NearbyOffers].nearbyOffers;
-export const getNearbyOffersError = (state: State): string | undefined => state[NameSpace.NearbyOffers].error;
 export const getIsNearbyOffersLoading = (state: State): boolean => state[NameSpace.NearbyOffers].isLoading;
 export const getSortedNearbyOffers = createSelector(
   getNearbyOffers,

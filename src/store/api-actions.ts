@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { PlaceCardType } from '../types/place-card';
 import { ThunkConfig } from '../types/state';
-import { APIRoute, AppRoute } from '../const';
+import { APIRoute, AppRoute, FavoriteStatus } from '../const';
 import { AuthType } from '../types/auth';
 import { dropToken, saveToken } from '../helpers/token';
 import { redirectToRoute } from './action';
@@ -215,7 +215,7 @@ export const fetchFavoriteOffers = createAsyncThunk<
 export const fetchFavorite = createAsyncThunk<
 OfferCardType,
 {
-  favoriteStatus: 0 | 1;
+  favoriteStatus: FavoriteStatus;
   offerId: PlaceCardType['id'];
 },
 ThunkConfig<string>
@@ -224,7 +224,7 @@ ThunkConfig<string>
   async ({favoriteStatus, offerId}, thunkApi) => {
     const { extra, rejectWithValue, getState, dispatch } = thunkApi;
     const offers = getOffers(getState());
-    const favorites = getFavoriteOffers(getState());
+    const favorites = getFavoriteOffers(getState()) || [];
 
     try {
       const response = await extra.api.post<OfferCardType>(`${APIRoute.Favorite}/${offerId}/${favoriteStatus}`);
@@ -234,7 +234,7 @@ ThunkConfig<string>
       }
 
       const newOffers = offers.map((offer) => offer.id === offerId ? {...offer, isFavorite: !!favoriteStatus} : offer);
-      const newFavorites = favoriteStatus === 0 ?
+      const newFavorites = favoriteStatus === FavoriteStatus.IsNotInFavorite ?
         favorites.filter((card) => card.id !== offerId) :
         [...favorites, response.data as PlaceCardType];
       dispatch(updateFavorites(newFavorites));

@@ -18,11 +18,11 @@ export const OffersContainer = (props: OffersContainerProps) => {
   const locationForMap = cards[0].city.location;
   const offerLocations = createOfferLocations(cards);
 
-  const onMouseEnter = useCallback((id: string) => {
+  const handleMouseEnter = useCallback((id: string) => {
     setActiveCardId(id);
   }, []);
 
-  const onMouseLeave = useCallback(() => {
+  const handleMouseLeave = useCallback(() => {
     setActiveCardId('');
   }, []);
 
@@ -33,8 +33,8 @@ export const OffersContainer = (props: OffersContainerProps) => {
         <b className="places__found">{cards.length} {`${cards.length === 1 ? 'place' : 'places'}`} to stay in {activeCity}</b>
         <Sorting/>
         <PlaceCardList
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           cards={cards}
           className={cn(
             'cities__places-list',

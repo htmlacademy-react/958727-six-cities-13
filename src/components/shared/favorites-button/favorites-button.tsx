@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { PlaceCardType } from '../../../types/place-card';
 import { getAuthorizationStatus } from '../../../store/user-process/selectors';
-import { AppRoute, AuthorizationStatus } from '../../../const';
+import { AppRoute, AuthorizationStatus, FavoriteStatus } from '../../../const';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { fetchFavorite } from '../../../store/api-actions';
 import { redirectToRoute } from '../../../store/action';
@@ -23,7 +23,7 @@ function FavoritesButton(props: FavoritesButtonProps): JSX.Element {
       dispatch(redirectToRoute(AppRoute.Login));
       return;
     }
-    const status = isFavorite ? 0 : 1;
+    const status = !isFavorite ? FavoriteStatus.IsInFavorite : FavoriteStatus.IsNotInFavorite;
     dispatch(fetchFavorite({offerId, favoriteStatus: status}));
   };
   return (

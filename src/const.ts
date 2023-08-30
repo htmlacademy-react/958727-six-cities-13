@@ -62,6 +62,11 @@ export enum APIRoute {
   Favorite = '/favorite'
 }
 
+export enum FavoriteStatus {
+  IsInFavorite = 1,
+  IsNotInFavorite = 0,
+}
+
 export const StatusCodeMap: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,

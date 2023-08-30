@@ -6,7 +6,6 @@ import { sortReviews } from '../../helpers/sort-reviews';
 
 export const getReviews = (state: State): ReviewType[] => state[NameSpace.Reviews].reviews;
 export const getReviewsError = (state: State): string | undefined => state[NameSpace.Reviews].getReviewsError;
-export const getSendReviewError = (state: State): string | undefined => state[NameSpace.Reviews].sendReviewError;
 export const getIsReviewsLoading = (state: State): boolean => state[NameSpace.Reviews].isLoading;
 export const getIsReviewSending = (state: State): boolean => state[NameSpace.Reviews].isSending;
 export const getSortedReviews = createSelector(
