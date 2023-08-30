@@ -44,5 +44,3 @@ export const reviewsData = createSlice({
       });
   }
 });
-
-export const {setReview} = reviewsData.actions;
