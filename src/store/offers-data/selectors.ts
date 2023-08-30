@@ -1,5 +1,5 @@
 import { NameSpace, SortingOptions } from '../../const';
-import { sortCards } from '../../helpers/sort-cards';
+import { sortCards } from '../../helpers/sortCards';
 import { PlaceCardType } from '../../types/place-card';
 import {State} from '../../types/state';
 import { createSelector } from '@reduxjs/toolkit';

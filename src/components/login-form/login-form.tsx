@@ -25,8 +25,8 @@ function LoginForm(): JSX.Element | null {
 
   return (
     <form className="login__form form" action="#" method="post" onSubmit={handleSubmit}>
-      <LoginFormField onChange={handleEmailChange} value={emailValue} name='email'/>
-      <LoginFormField onChange={handlePasswordChange} value={passwordValue} name='password'/>
+      <LoginFormField onChange={handleEmailChange} value={emailValue} name="email"/>
+      <LoginFormField onChange={handlePasswordChange} value={passwordValue} name="password"/>
       <button
         className="login__submit form__submit button"
         type="submit"

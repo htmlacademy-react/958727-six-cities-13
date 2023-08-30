@@ -3,7 +3,8 @@ import { ChangeEvent, useState, FormEvent, useCallback } from 'react';
 import RatingInput from '../rating-input/rating-input';
 import { PlaceCardType } from '../../types/place-card';
 import { fetchPostReview } from '../../store/api-actions';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getIsReviewSending } from '../../store/reviews-data/selectors';
 
 type ReviewFormProps = {
     authorizationStatus: string;
@@ -13,18 +14,21 @@ type ReviewFormProps = {
 function ReviewForm(props: ReviewFormProps): JSX.Element | null {
 
   const { offerId, authorizationStatus } = props;
+  const isFormSending = useAppSelector(getIsReviewSending);
   const [ratingValue, setRatingValue] = useState(0);
   const [textValue, setTextValue] = useState('');
 
   const isSubmitDisabled = !ratingValue ||
   (textValue.length < ReviewLength.Min) ||
-  (textValue.length > ReviewLength.Max);
+  (textValue.length > ReviewLength.Max) ||
+  isFormSending;
 
   const dispatch = useAppDispatch();
 
-  const handleRatingChange = useCallback((value: number): void => {
-    setRatingValue(value);
+  const handleRatingChange = useCallback((evt:ChangeEvent<HTMLInputElement>): void => {
+    setRatingValue(Number(evt.target.value));
   }, []);
+
   const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
     setTextValue(evt.target.value);
   };
@@ -36,6 +40,8 @@ function ReviewForm(props: ReviewFormProps): JSX.Element | null {
       rating: ratingValue,
     };
     dispatch(fetchPostReview({reviewData, id: offerId}));
+    setRatingValue(0);
+    setTextValue('');
   };
 
   if (authorizationStatus !== AuthorizationStatus.Auth) {
@@ -58,22 +64,23 @@ function ReviewForm(props: ReviewFormProps): JSX.Element | null {
             <RatingInput
               key={item}
               onChange={handleRatingChange}
-              defaultValue={RatingTitles.length - index}
+              isChecked={ratingValue === RatingTitles.length - index}
+              value={RatingTitles.length - index}
               id={`${RatingTitles.length - index}-stars`}
               title={item}
+              disabled={isFormSending}
             />
           ))
         }
       </div>
       <textarea
         onChange={handleTextChange}
-        minLength={ReviewLength.Min}
-        maxLength={ReviewLength.Max}
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
+        value={textValue}
+        disabled={isFormSending}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

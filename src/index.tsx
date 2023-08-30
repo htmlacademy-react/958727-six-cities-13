@@ -14,10 +14,10 @@ const root = ReactDOM.createRoot(
 store.dispatch(fetchAuth());
 
 root.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <ToastContainer />
-    <App/>
-  </Provider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <ToastContainer limit={1} position='bottom-left'/>
+      <App/>
+    </Provider>
+  </React.StrictMode>
 );

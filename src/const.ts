@@ -1,3 +1,5 @@
+import {StatusCodes} from 'http-status-codes';
+
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
@@ -38,6 +40,8 @@ export enum NameSpace {
   User = 'USER',
   Reviews = 'REVIEWS',
   NearbyOffers = 'NEARBY_OFFERS',
+  FavoriteOffers = 'FAVORITE_OFFERS',
+  FavoriteSingleOffer = 'FAVORITE_SINGLE_OFFER',
 }
 
 export enum Cities {
@@ -55,7 +59,20 @@ export enum APIRoute {
   Logout = '/logout',
   Reviews = '/comments',
   NearbyOffers = '/nearby',
+  Favorite = '/favorite'
 }
+
+export enum FavoriteStatus {
+  IsInFavorite = 1,
+  IsNotInFavorite = 0,
+}
+
+export const StatusCodeMap: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true,
+  [StatusCodes.INTERNAL_SERVER_ERROR]: true,
+};
 
 export const LoginFormRegex = {
   Email: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
