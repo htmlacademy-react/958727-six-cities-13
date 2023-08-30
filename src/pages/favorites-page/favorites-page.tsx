@@ -23,7 +23,7 @@ function FavoritesPage(): JSX.Element {
 
   return (
     cards?.length !== 0 ?
-      <Favorites cards={cards}/> :
+      <Favorites cards={cards ? cards : []}/> :
       <FavoritesEmpty/>
   );
 }

@@ -23,7 +23,7 @@ function FavoritesButton(props: FavoritesButtonProps): JSX.Element {
       dispatch(redirectToRoute(AppRoute.Login));
       return;
     }
-    const status = isFavorite ? FavoriteStatus.IsInFavorite : FavoriteStatus.IsNotInFavorite;
+    const status = !isFavorite ? FavoriteStatus.IsInFavorite : FavoriteStatus.IsNotInFavorite;
     dispatch(fetchFavorite({offerId, favoriteStatus: status}));
   };
   return (
