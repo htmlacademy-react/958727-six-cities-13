@@ -8,7 +8,7 @@ const initialState: ReviewsDataType = {
   reviews: [],
   isLoading: false,
   isSending: false,
-  getReviewsError: '',
+  reviewsError: '',
   sendReviewError: '',
 };
 
@@ -20,11 +20,11 @@ export const reviewsData = createSlice({
     builder
       .addCase(fetchReviews.fulfilled, (state, action: PayloadAction<ReviewType[]>) => {
         state.reviews = action.payload;
-        state.getReviewsError = '';
+        state.reviewsError = '';
         state.isLoading = false;
       })
       .addCase(fetchReviews.rejected, (state, action: PayloadAction<string | undefined>) => {
-        state.getReviewsError = action.payload;
+        state.reviewsError = action.payload;
         state.isLoading = false;
       })
       .addCase(fetchReviews.pending, (state) => {
