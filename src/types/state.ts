@@ -24,7 +24,7 @@ export type ReviewsDataType = {
     reviews: ReviewType[];
     isLoading: boolean;
     isSending: boolean;
-    getReviewsError?: string;
+    reviewsError?: string;
     sendReviewError?: string;
 }
 
@@ -36,12 +36,6 @@ export type NearbyOffersDataType = {
 
 export type FavoriteOffersDataType = {
     favoriteOffers: PlaceCardType[] | null;
-    isLoading: boolean;
-    error?: string;
-}
-
-export type FavoriteSingleOfferDataType = {
-    favoriteSingleOffer: OfferCardType | null;
     isLoading: boolean;
     error?: string;
 }
