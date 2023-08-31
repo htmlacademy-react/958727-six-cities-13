@@ -4,6 +4,7 @@ import { fetchAuth, fetchLogin, fetchLogout, fetchOffers } from '../api-actions'
 import { userProcess } from './user-process';
 import { AuthorizationStatus } from '../../const';
 import { createFakeUser } from '../../utils/mocks/create-fake-user';
+import { createFakeAuthData } from '../../utils/mocks/create-fake-auth-data';
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
@@ -59,17 +60,19 @@ describe('fetchAuth', () => {
 describe('fetchLogin', () => {
   it('should set userData', () => {
     const mockUser = createFakeUser();
+    const mockUserData = createFakeAuthData();
     const expectedState = {
       authorizationStatus: AuthorizationStatus.Auth,
       userData: mockUser
     };
 
-    const result = userProcess.reducer(undefined, fetchLogin.fulfilled(mockUser, '', {login: 'asf@ff.ru', password: 'ff12'}));
+    const result = userProcess.reducer(undefined, fetchLogin.fulfilled(mockUser, '', mockUserData));
 
     expect(result).toEqual(expectedState);
   });
   it('should set authorizationStatus to AuthorizationStatus.NoAuth', () => {
     const error = new Error;
+    const mockUserData = createFakeAuthData(true);
     const expectedState = {
       authorizationStatus: AuthorizationStatus.NoAuth,
       userData: {
@@ -80,7 +83,7 @@ describe('fetchLogin', () => {
       }
     };
 
-    const result = userProcess.reducer(undefined, fetchLogin.rejected(error, '', {login: '', password: ''}));
+    const result = userProcess.reducer(undefined, fetchLogin.rejected(error, '', mockUserData));
 
     expect(result).toEqual(expectedState);
   });

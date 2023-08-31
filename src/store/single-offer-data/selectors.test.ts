@@ -2,7 +2,7 @@ import { NameSpace } from '../../const';
 import { getSingleOffer, getIsSingleOfferLoading } from './selectors';
 import { createFakeOffer } from '../../utils/mocks/create-fake-offer';
 
-describe('Favorites selectors', () => {
+describe('Single offer selectors', () => {
   const state = {
     [NameSpace.SingleOffer]: {
       singleOffer: createFakeOffer(),
@@ -11,7 +11,7 @@ describe('Favorites selectors', () => {
     }
   };
 
-  it('should return favorites data from state', () => {
+  it('should return single offer data from state', () => {
     const { singleOffer } = state[NameSpace.SingleOffer];
     const result = getSingleOffer(state);
     expect(result).toEqual(singleOffer);

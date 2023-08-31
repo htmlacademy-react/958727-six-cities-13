@@ -6,7 +6,7 @@ import { createFakeReview, createFakeReviews } from '../../utils/mocks/create-fa
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
-describe('reviewsSlice', () => {
+describe('reviewsData', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = {type: ''};
     const expectedState = {
@@ -39,7 +39,7 @@ describe('reviewsSlice', () => {
 });
 
 describe('fetchReviews', () => {
-  it('should load array of reviews on fetchReviewsAction.fulfilled', () => {
+  it('should load array of reviews on fetchReviews.fulfilled', () => {
 
     const mockReviews = createFakeReviews();
 
@@ -74,7 +74,7 @@ describe('fetchReviews', () => {
 });
 
 describe('fetchPostReview', () => {
-  it('should load array of reviews on fetchReviewsAction.fulfilled', () => {
+  it('should load array of reviews on fetchReviews.fulfilled', () => {
 
     const mockReviews = createFakeReviews();
     const mockReview = createFakeReview();

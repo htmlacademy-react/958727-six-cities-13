@@ -5,7 +5,7 @@ import { singleOfferData } from './single-offer-data';
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
-describe('singleOfferSlice', () => {
+describe('singleOfferData', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = {type: ''};
     const expectedState = {
@@ -19,7 +19,7 @@ describe('singleOfferSlice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  describe('fetchFavoriteOffers', () => {
+  describe('fetchSingleOffer', () => {
     it('should load singleOffer', () => {
       const mockOffer = createFakeOffer();
       const expectedState = {

@@ -5,7 +5,7 @@ import { nearbyOffersData } from './nearby-offers-data';
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
-describe('favoriteOffersSlice', () => {
+describe('nearbyOffersData', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = {type: ''};
     const expectedState = {

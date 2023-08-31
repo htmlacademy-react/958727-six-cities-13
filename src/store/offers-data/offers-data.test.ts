@@ -6,7 +6,7 @@ import { Cities, INITIAL_CITY, INITIAL_FILTER_TYPE, SortingOptions } from '../..
 
 vi.mock('../root-reducer', () => ({ rootReducer: vi.fn() }));
 
-describe('offersSlice', () => {
+describe('offersData', () => {
   it('should return initial state with empty action', () => {
     const emptyAction = {type: ''};
     const expectedState = {

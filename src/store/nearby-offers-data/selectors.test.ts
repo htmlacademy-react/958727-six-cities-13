@@ -2,7 +2,7 @@ import { NameSpace } from '../../const';
 import { getIsNearbyOffersLoading, getNearbyOffers } from './selectors';
 import { createFakeOffers } from './../../utils/mocks/create-fake-offers';
 
-describe('Favorites selectors', () => {
+describe('Nearby offers selectors', () => {
   const state = {
     [NameSpace.NearbyOffers]: {
       nearbyOffers: createFakeOffers(true),

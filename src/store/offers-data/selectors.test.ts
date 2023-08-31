@@ -2,7 +2,7 @@ import { INITIAL_CITY, INITIAL_FILTER_TYPE, NameSpace } from '../../const';
 import { getOffers, getIsOffersLoading, getCity, getFilterType } from './selectors';
 import { createFakeOffers } from './../../utils/mocks/create-fake-offers';
 
-describe('Favorites selectors', () => {
+describe('Offers selectors', () => {
   const state = {
     [NameSpace.Offers]: {
       offers: createFakeOffers(true),
