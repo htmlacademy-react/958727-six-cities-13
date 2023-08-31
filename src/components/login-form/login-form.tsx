@@ -11,15 +11,15 @@ function LoginForm(): JSX.Element | null {
   const isSubmitDisabled = !validateEmail(emailValue) || !validatePassword(passwordValue);
   const dispatch = useAppDispatch();
 
-  const handleEmailChange = useCallback((evt: ChangeEvent<HTMLInputElement>): void => {
-    setEmailValue(evt.target.value);
+  const handleEmailChange = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
+    setEmailValue(event.target.value);
   }, []);
-  const handlePasswordChange = useCallback((evt: ChangeEvent<HTMLInputElement>): void => {
-    setPasswordValue(evt.target.value.replaceAll(' ', ''));
+  const handlePasswordChange = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
+    setPasswordValue(event.target.value.replaceAll(' ', ''));
   }, []);
 
-  const handleSubmit = (evt: FormEvent) => {
-    evt.preventDefault();
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
     dispatch(fetchLogin({login: emailValue, password: passwordValue}));
   };
 

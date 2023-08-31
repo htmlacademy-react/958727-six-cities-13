@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import { capitalize } from '../../helpers/capitalize';
 
 type LoginFormFieldProps = {
-    onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     value: string;
     name: string;
 }

@@ -11,8 +11,8 @@ const CityList = memo((): JSX.Element => {
   const cities = Object.values(Cities);
   const dispatch = useAppDispatch();
 
-  const handleCityClick = (cityName: keyof typeof Cities) => (evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
-    evt.preventDefault();
+  const handleCityClick = (cityName: keyof typeof Cities) => (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
+    event.preventDefault();
     dispatch(setCity(Cities[cityName]));
   };
 
