@@ -25,16 +25,16 @@ function ReviewForm(props: ReviewFormProps): JSX.Element | null {
 
   const dispatch = useAppDispatch();
 
-  const handleRatingChange = useCallback((evt:ChangeEvent<HTMLInputElement>): void => {
-    setRatingValue(Number(evt.target.value));
+  const handleRatingChange = useCallback((event:ChangeEvent<HTMLInputElement>): void => {
+    setRatingValue(Number(event.target.value));
   }, []);
 
-  const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>): void => {
-    setTextValue(evt.target.value);
+  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    setTextValue(event.target.value);
   };
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const reviewData = {
       comment: textValue,
       rating: ratingValue,

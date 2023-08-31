@@ -78,9 +78,10 @@ export const fetchLogin = createAsyncThunk<UserDataType, AuthType, ThunkConfig<s
 export const fetchLogout = createAsyncThunk<void, undefined, ThunkConfig<string>>(
   'user/logout',
   async (_, thunkApi) => {
-    const { extra, rejectWithValue } = thunkApi;
+    const { extra, rejectWithValue, dispatch } = thunkApi;
     try {
       await extra.api.delete(APIRoute.Logout);
+      dispatch(updateFavorites(null));
       dropToken();
     } catch (error) {
       return rejectWithValue(manageResponseError(error));

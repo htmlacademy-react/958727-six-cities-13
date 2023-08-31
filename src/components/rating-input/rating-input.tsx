@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 type RatingInputProps = {
-    onChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
     value: number;
     id: string;
     title: string;

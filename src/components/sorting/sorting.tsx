@@ -20,9 +20,9 @@ const Sorting = memo((): JSX.Element => {
     setIsMenuOpened(false);
   };
 
-  const handleDocumentClick = useCallback((evt: MouseEvent) => {
-    if (evt.target instanceof Element) {
-      const item = evt.target.closest('.places__sorting');
+  const handleDocumentClick = useCallback((event: MouseEvent) => {
+    if (event.target instanceof Element) {
+      const item = event.target.closest('.places__sorting');
       if (!item && isMenuOpened) {
         setIsMenuOpened(false);
       }

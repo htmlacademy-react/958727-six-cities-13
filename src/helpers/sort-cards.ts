@@ -7,13 +7,13 @@ export const sortCards = (cards: PlaceCardType[], option: string): PlaceCardType
     case SortingOptions.Popular:
       return cards;
     case SortingOptions.PriceHighToLow:
-      cards.sort((a, b) => b.price - a.price);
+      [...cards].sort((a, b) => b.price - a.price);
       break;
     case SortingOptions.PriceLowToHigh:
-      cards.sort((a, b) => a.price - b.price);
+      [...cards].sort((a, b) => a.price - b.price);
       break;
     case SortingOptions.TopRatedFirst:
-      cards.sort((a, b) => b.rating - a.rating);
+      [...cards].sort((a, b) => b.rating - a.rating);
       break;
     default:
       return cards;
