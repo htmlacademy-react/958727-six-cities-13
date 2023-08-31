@@ -16,7 +16,7 @@ export const sortCards = (cards: PlaceCardType[], option: string): PlaceCardType
       [...cards].sort((a, b) => b.rating - a.rating);
       break;
     default:
-      return [...cards];
+      return cards;
   }
   return cards;
 };
