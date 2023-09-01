@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../shared/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import AuthUserNavItems from './auth-user-nav-items';
 import { fetchFavoriteOffers } from '../../store/api-actions';
 import { getFavoriteOffers } from '../../store/favorite-offers-data/selectors';

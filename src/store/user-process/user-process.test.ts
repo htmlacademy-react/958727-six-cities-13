@@ -1,6 +1,5 @@
 import {expect} from 'vitest';
-import { createFakeOffers } from '../../utils/mocks/create-fake-offers';
-import { fetchAuth, fetchLogin, fetchLogout, fetchOffers } from '../api-actions';
+import { fetchAuth, fetchLogin, fetchLogout } from '../api-actions';
 import { userProcess } from './user-process';
 import { AuthorizationStatus } from '../../const';
 import { createFakeUser } from '../../utils/mocks/create-fake-user';
