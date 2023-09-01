@@ -33,4 +33,10 @@ describe('Redirect middleware', () => {
     store.dispatch(redirectAction);
     expect(browserHistory.location.pathname).toBe(AppRoute.Login);
   });
+
+  it('should not redirect to "/login" with empty action', () => {
+    const emptyAction = { type: '', payload: AppRoute.Login };
+    store.dispatch(emptyAction);
+    expect(browserHistory.location.pathname).not.toBe(AppRoute.Login);
+  });
 });
