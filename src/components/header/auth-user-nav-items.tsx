@@ -24,6 +24,7 @@ function AuthUserNavItems({favoritesCount}: AuthUserNavItemsProps): JSX.Element 
           className="header__nav-link header__nav-link--profile"
         >
           <div className="header__avatar-wrapper user__avatar-wrapper">
+            <img src={userData?.avatarUrl} alt="" />
           </div>
           <span className="header__user-name user__name">
             {userData.email}
