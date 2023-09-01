@@ -13,7 +13,6 @@ function Header(): JSX.Element {
   const dispatch = useAppDispatch();
   const favoriteOffers = useAppSelector(getFavoriteOffers);
   const location = useLocation();
-  const userData = useAppSelector(getUserData);
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth && !favoriteOffers) {
@@ -37,7 +36,6 @@ function Header(): JSX.Element {
                   <li className="header__nav-item">
                     <Link to={AppRoute.Login} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
-                        <img src={userData?.avatarUrl} alt="" />
                       </div>
                       <span className="header__login">Sign in</span>
                     </Link>
